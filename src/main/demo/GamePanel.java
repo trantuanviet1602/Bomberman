@@ -1,5 +1,7 @@
 package demo;
 
+import SuperObject.SuperObject;
+import demo.entity.CollisionCheck;
 import demo.entity.Player;
 import demo.tile.TileManager;
 
@@ -10,25 +12,32 @@ public class GamePanel extends JPanel implements Runnable, Constant {
     //Screen Settings
 
     Keyboard keyboard = new Keyboard();
-    Player player = new Player(this, keyboard);
+    public Player player = new Player(this, keyboard);
 
-    TileManager tileManager = new TileManager(this);
+    public TileManager tileManager = new TileManager(this);
 
     //Game clock.
     Thread gameThread;
+    public CollisionCheck collisionCheck = new CollisionCheck(this);
 
-    int playerX = 64;
-    int playerY = 64;
-    int playerSpeed = 3;
+    public SuperObject[] superObjects = new SuperObject[10];
+    public AssetSetter assetSetter = new AssetSetter(this);
+
+    public void setupGame() {
+        assetSetter.setObject();
+    }
+
+
 
 
     //FPS
 
     int FPS = 60;
 
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // Đặt kích cỡ của class JPanel.
-        this.setBackground(Color.black);
+        this.setBackground(Color.green);
         this.setDoubleBuffered(true); //Tất cả các bản vẽ từ thành phần này sẽ được thực hiện trong một bộ đệm vẽ ngoài màn hình
         this.addKeyListener(keyboard);
         this.setFocusable(true);
@@ -42,14 +51,11 @@ public class GamePanel extends JPanel implements Runnable, Constant {
 
     @Override
     public void run() {
-        double drawInteval =1000000000/FPS;
+        double drawInteval = 1000000000.0/FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
         long timer = 0;
-        long drawCount = 0;
-
-
 
 
         //TODO: Tạo game loop
@@ -65,11 +71,9 @@ public class GamePanel extends JPanel implements Runnable, Constant {
                 //TODO: draw
                 repaint();
                 delta--;
-                drawCount++;
             }
 
             if(timer >= 1000000000) {
-                drawCount = 0;
                 timer = 0;
             }
         }
@@ -81,12 +85,19 @@ public class GamePanel extends JPanel implements Runnable, Constant {
 
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-
         Graphics2D graphics2D = (Graphics2D) graphics;
+
+
+
         tileManager.draw(graphics2D);
+        for(int i = 0 ; i < 10 ; i ++ ) {
+            if(superObjects[i] != null) {
+                superObjects[i].draw(graphics2D);
+            }
+        }
         player.draw(graphics2D);
 
-        graphics2D.dispose(); //Giảm bộ nhớ.
+       graphics2D.dispose(); //Giảm bộ nhớ.
 
     }
 }

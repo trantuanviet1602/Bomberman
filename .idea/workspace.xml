@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d879eeea-af2e-4e0a-ae4c-14404669aff9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Banking System/src/Account.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Banking System/src/Bank.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Banking System/src/BankException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Banking System/src/CheckingAccount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Banking System/src/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Banking System/src/InsufficientFundsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Banking System/src/InvalidFundingAmountException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Banking System/src/SavingsAccount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Banking System/src/Transaction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Banking System/src/config.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Bomb/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Chess/src/Bishop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Chess/src/Board.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Chess/src/Game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Chess/src/Move.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Chess/src/Piece.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Chess/src/Rook.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Expression/src/Addition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Expression/src/BinaryExpression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Expression/src/Division.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Expression/src/Expression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Expression/src/ExpressionTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Expression/src/Multiplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Expression/src/Numeral.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Expression/src/Square.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Expression/src/Subtraction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/src/main/java/com/example/game/BombermanGame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/src/main/java/com/example/game/Brick.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/src/main/java/com/example/game/Frame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/src/main/java/com/example/game/Keyboard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/src/main/java/com/example/game/Map.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/src/main/java/com/example/game/MyImage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/src/main/java/com/example/game/Path.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/src/main/java/com/example/game/entities/Bomber.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/src/main/java/com/example/game/entities/Entities.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/src/main/java/com/example/game/entities/Grass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/src/main/java/com/example/game/entities/Wall.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/src/main/resources/com/example/game/Scene.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/src/main/resources/com/example/game/hello-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Hooman/Hooman.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Hooman/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Hooman/src/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Hooman/src/Staff.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Hooman/src/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JUnit/JUnit.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mathematics/Mathematics.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mathematics/src/Circle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mathematics/src/Cylinder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mathematics/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Transaction/Transaction.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Vehicle/src/Car.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Vehicle/src/MotorBike.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Vehicle/src/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Vehicle/src/Vehicle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Week11/src/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Week11/src/Week11.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Week4/Week4.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Week4/src/Week4.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Week4/src/Week4Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Week8Task2/src/Week8Task2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/SuperObject/Bomb.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/SuperObject/Explosion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/SuperObject/ObjectSpeed.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/SuperObject/SuperObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/demo/AssetSetter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/demo/entity/CollisionCheck.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../untitled/src/Layer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../untitled/src/Point.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../untitled/untitled.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/demo/Bomber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/demo/Bomber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/demo/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/demo/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/demo/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/demo/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/demo/ImagePath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/demo/ImagePath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/demo/Keyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/demo/Keyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/demo/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/demo/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/demo/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/demo/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/demo/tile/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/demo/tile/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/demo/tile/TileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/demo/tile/TileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/balloom_dead.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/balloom_left1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/balloom_left2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/balloom_left3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/balloom_right1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/balloom_right2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/balloom_right3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/bomb.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/bomb.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/bomb_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/bomb_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/bomb_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/bomb_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/bomb_exploded.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/bomb_exploded.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/bomb_exploded1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/bomb_exploded2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/brick.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/brick.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/brick_exploded.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/brick_exploded.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/brick_exploded1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/brick_exploded2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/doll_dead.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/doll_left1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/doll_left2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/doll_left3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/doll_right1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/doll_right2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/doll_right3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_horizontal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_horizontal1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_horizontal2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_horizontal_left_last.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/explosion_horizontal_left_last.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_horizontal_left_last1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_horizontal_left_last2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_horizontal_right_last.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/explosion_horizontal_right_last.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_horizontal_right_last1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_horizontal_right_last2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_vertical.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_vertical1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_vertical2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_vertical_down_last.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_vertical_down_last1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_vertical_down_last2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_vertical_top_last.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_vertical_top_last1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/explosion_vertical_top_last2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/grass.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/grass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/kondoria_dead.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/kondoria_left1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/kondoria_left2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/kondoria_left3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/kondoria_right1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/kondoria_right2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/kondoria_right3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/minvo_dead.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/minvo_left1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/minvo_left2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/minvo_left3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/minvo_right1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/minvo_right2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/minvo_right3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/mob_dead1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/mob_dead2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/mob_dead3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/oneal_dead.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/oneal_left1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/oneal_left2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/oneal_left3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/oneal_right1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/oneal_right2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/oneal_right3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_dead1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_dead2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_dead3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_down.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/player_down.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_down_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/player_down_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_down_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/player_down_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_left.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/player_left.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_left_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/player_left_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_left_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/player_left_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_right.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/player_right.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_right_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/player_right_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_right_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/player_right_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_up.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/player_up.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_up_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/player_up_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/player_up_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/player_up_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/portal.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/portal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/powerup_bombpass.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/powerup_bombpass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/powerup_bombs.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/powerup_bombs.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/powerup_detonator.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/powerup_detonator.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/powerup_flamepass.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/powerup_flamepass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/powerup_speed.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/powerup_speed.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/powerup_wallpass.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/powerup_wallpass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/sprite/wall.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/sprite/wall.png" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2FZNwQh3SEjdacce22VBpwVaA4w" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ProjectJava/demo/src/main/java/com/example/demo/entity&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ProjectJava\demo\src\main\java\com\example\demo\entity" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ProjectJava\demo\src\main\java\res" />
+      <recent name="D:\ProjectJava\demo\src\main\java" />
+      <recent name="D:\ProjectJava\demo\src\main" />
+      <recent name="D:\ProjectJava\demo\res" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Bomber">
+    <configuration name="Bomber" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="demo.Bomber" />
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Map" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="demo.tile.Map" />
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="demo.tile.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Bomber" />
+        <item itemvalue="Application.Map" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d879eeea-af2e-4e0a-ae4c-14404669aff9" name="Changes" comment="" />
+      <created>1664695886601</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1664695886601</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,9 +1,5 @@
 package demo;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-
 public interface ImagePath {
     String UP_PATH = "src/res/sprite/player_up.png";
     String UP1_PATH = "src/res/sprite/player_up_1.png";
@@ -22,4 +18,18 @@ public interface ImagePath {
     String WALL_PATH = "src/res/sprite/wall.png";
     String GRASS_PATH = "src/res/sprite/grass.png";
     String BRICK_PATH = "src/res/sprite/brick.png";
+
+    String SPEED_OBJECT = "src/res/sprite/powerup_speed.png";
+
+    String BOMB_OBJECT = "src/res/sprite/bomb.png";
+
+    String BOMB1_OBJECT = "src/res/sprite/bomb_1.png";
+    String BOMB2_OBJECT = "src/res/sprite/bomb_2.png";
+
+    String BOMB_EXPLODED = "src/res/sprite/bomb_exploded.png";
+
+    String BOMB_EXPLODED_1 = "src/res/sprite/bomb_exploded_1.png";
+
+    String BOMB_EXPLODED_2 = "src/res/sprite/bomb_exploded_2.png";
+
 }

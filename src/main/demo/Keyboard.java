@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 public class Keyboard implements KeyListener {
     public boolean up, down, left, right;
+    public boolean space;
 
     @Override
     public void keyTyped(KeyEvent keyEvent) {
@@ -27,6 +28,9 @@ public class Keyboard implements KeyListener {
         if (code == KeyEvent.VK_RIGHT) {
             right = true;
         }
+        if (code == KeyEvent.VK_SPACE) {
+            space = true;
+        }
     }
 
     @Override
@@ -44,6 +48,9 @@ public class Keyboard implements KeyListener {
         }
         if (code == KeyEvent.VK_RIGHT) {
             right = false;
+        }
+        if (code == KeyEvent.VK_SPACE) {
+            space = false;
         }
     }
 }

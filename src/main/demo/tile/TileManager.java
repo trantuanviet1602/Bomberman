@@ -1,15 +1,19 @@
 package demo.tile;
 
+import demo.Constant;
 import demo.GamePanel;
 import demo.ImagePath;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
 
-public class TileManager implements ImagePath {
+
+public class TileManager implements ImagePath, Constant {
     GamePanel gamePanel;
     Tile grassTile, wallTile, brickTile;
+
+
+
+    public Map map = new Map();
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -25,9 +29,38 @@ public class TileManager implements ImagePath {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        wallTile.collision = false;
+        brickTile.collision = false;
     }
 
+
     public void draw(Graphics2D graphics2D) {
-        graphics2D.drawImage(grassTile.bufferedImage, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+        try {
+            int worldCol = 0;
+            int worldRow = 0;
+            while (worldCol < map.cols && worldRow < map.rows) {
+                int worldX = worldCol * tileSize;
+                int worldY = worldRow * tileSize;
+
+                if(map.mapTile[worldRow].charAt(worldCol) == '#') {
+                    graphics2D.drawImage(wallTile.bufferedImage,worldX, worldY , tileSize, tileSize, null);
+                } else if(map.mapTile[worldRow].charAt(worldCol) == '*') {
+                    graphics2D.drawImage(brickTile.bufferedImage,worldX, worldY , tileSize, tileSize, null);
+                } else {
+                    graphics2D.drawImage(grassTile.bufferedImage,worldX, worldY , tileSize, tileSize, null);
+                }
+
+
+                worldCol++;
+
+                if(worldCol == map.cols) {
+                    worldCol = 0;
+                    worldRow ++ ;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
