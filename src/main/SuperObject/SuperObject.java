@@ -1,6 +1,6 @@
 package SuperObject;
 
-import demo.Constant;
+import Implements.Constant;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

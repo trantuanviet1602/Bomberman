@@ -1,8 +1,11 @@
 package demo;
 
+import Implements.Constant;
+import SuperObject.Bomb.BombManager;
 import SuperObject.SuperObject;
+import demo.entity.BalloomManager;
 import demo.entity.CollisionCheck;
-import demo.entity.Player;
+import demo.entity.Player.Player;
 import demo.tile.TileManager;
 
 import javax.swing.*;
@@ -13,6 +16,7 @@ public class GamePanel extends JPanel implements Runnable, Constant {
 
     Keyboard keyboard = new Keyboard();
     public Player player = new Player(this, keyboard);
+    public BombManager bombManager = new BombManager(this);
 
     public TileManager tileManager = new TileManager(this);
 
@@ -22,6 +26,8 @@ public class GamePanel extends JPanel implements Runnable, Constant {
 
     public SuperObject[] superObjects = new SuperObject[10];
     public AssetSetter assetSetter = new AssetSetter(this);
+
+    public BalloomManager balloomManager = new BalloomManager(this);
 
     public void setupGame() {
         assetSetter.setObject();
@@ -80,22 +86,28 @@ public class GamePanel extends JPanel implements Runnable, Constant {
     }
 
     public void update() {
-        player.update();
+        player.update(bombManager);
+        tileManager.update(bombManager);
+        balloomManager.update(player, bombManager);
+        bombManager.update();
     }
 
     public void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
+        super.paintComponent (graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
 
 
-
         tileManager.draw(graphics2D);
+
         for(int i = 0 ; i < 10 ; i ++ ) {
             if(superObjects[i] != null) {
                 superObjects[i].draw(graphics2D);
             }
         }
+        balloomManager.draw(graphics2D);
+        bombManager.draw(graphics2D);
         player.draw(graphics2D);
+
 
        graphics2D.dispose(); //Giảm bộ nhớ.
 

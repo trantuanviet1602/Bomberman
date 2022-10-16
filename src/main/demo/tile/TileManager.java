@@ -1,66 +1,37 @@
 package demo.tile;
 
-import demo.Constant;
+import Implements.Constant;
+import SuperObject.Bomb.BombManager;
 import demo.GamePanel;
-import demo.ImagePath;
+import Implements.ImagePath;
+import demo.tile.brick.BrickManager;
+import demo.tile.wall.WallManager;
 
 import java.awt.*;
 
 
 public class TileManager implements ImagePath, Constant {
     GamePanel gamePanel;
-    Tile grassTile, wallTile, brickTile;
+    public static BrickManager brickManager;
+    public static WallManager wallManager;
+    public GameMap gameMap = new GameMap();
 
 
 
-    public Map map = new Map();
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        getTileImage();
+        brickManager = new BrickManager(this.gamePanel);
+        wallManager = new WallManager();
     }
 
-    public void getTileImage() {
-        try {
-            grassTile = new Tile(GRASS_PATH);
-            wallTile = new Tile(WALL_PATH);
-            brickTile = new Tile(BRICK_PATH);
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        wallTile.collision = false;
-        brickTile.collision = false;
+    public void update(BombManager bombManager) {
+        brickManager.update(bombManager);
     }
 
 
     public void draw(Graphics2D graphics2D) {
-        try {
-            int worldCol = 0;
-            int worldRow = 0;
-            while (worldCol < map.cols && worldRow < map.rows) {
-                int worldX = worldCol * tileSize;
-                int worldY = worldRow * tileSize;
-
-                if(map.mapTile[worldRow].charAt(worldCol) == '#') {
-                    graphics2D.drawImage(wallTile.bufferedImage,worldX, worldY , tileSize, tileSize, null);
-                } else if(map.mapTile[worldRow].charAt(worldCol) == '*') {
-                    graphics2D.drawImage(brickTile.bufferedImage,worldX, worldY , tileSize, tileSize, null);
-                } else {
-                    graphics2D.drawImage(grassTile.bufferedImage,worldX, worldY , tileSize, tileSize, null);
-                }
-
-
-                worldCol++;
-
-                if(worldCol == map.cols) {
-                    worldCol = 0;
-                    worldRow ++ ;
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
+        brickManager.draw(graphics2D);
+        wallManager.draw(graphics2D);
     }
 }

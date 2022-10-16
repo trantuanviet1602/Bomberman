@@ -1,16 +1,17 @@
 package demo.tile;
 
-import demo.Constant;
+import Implements.Constant;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Map implements Constant {
+public class GameMap implements Constant {
     public String[] mapTile;
+
     public int cols, rows;
 
-    public Map() {
+    public GameMap() {
         try {
             loadMap();
         } catch (FileNotFoundException e) {
@@ -26,14 +27,14 @@ public class Map implements Constant {
         mapTile = new String[rows];
         for(int j = 0; j < rows; j++) {
             mapTile[j] = scanner.nextLine();
-            System.out.println(mapTile[j]);
+          //  System.out.println(mapTile[j]);
         }
     }
 
     public static void main(String[] args) {
-        Map map = new Map();
+        GameMap gameMap = new GameMap();
         try {
-            map.loadMap();
+            gameMap.loadMap();
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }

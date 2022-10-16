@@ -1,10 +1,12 @@
-package SuperObject;
+package SuperObject.Bomb;
 
-import demo.Constant;
+import Implements.Constant;
 import demo.GamePanel;
-import demo.ImagePath;
+import Implements.ImagePath;
+import demo.entity.Balloom;
+import demo.entity.BalloomManager;
 import demo.entity.Entity;
-import demo.entity.Player;
+import demo.entity.Player.Player;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,7 +15,6 @@ import java.io.File;
 
 
 public class Bomb extends Entity implements ImagePath, Constant {
-
     public boolean set = false;
 
     private int time = 0;
@@ -22,7 +23,7 @@ public class Bomb extends Entity implements ImagePath, Constant {
     public boolean exploded  = false;
 
     private BufferedImage bufferedImage, bufferedImage1, bufferedImage2;
-    Explosion explosion;
+    public Explosion explosion;
 
     public void loadImage() {
         try {
@@ -68,7 +69,7 @@ public class Bomb extends Entity implements ImagePath, Constant {
                 spriteCounter = 0;
             }
         } else {
-            spriteNum = 0;
+            spriteNum = -1;
         }
         if (time == 100) {
             explode();
@@ -79,20 +80,20 @@ public class Bomb extends Entity implements ImagePath, Constant {
         exploded = true;
         explosion.update();
         set = false;
-
-
     }
+
+
     public void draw(Graphics2D graphics2D) {
         if (exploded) {
             explosion.draw(graphics2D);
             exploded = false;
-            new Bomb(gamePanel);
+            //new Bomb(gamePanel);
         } else {
             if (spriteNum == 0) {
                 graphics2D.drawImage(bufferedImage, this.x, this.y, tileSize, tileSize , null);
             } else if (spriteNum == 1) {
                 graphics2D.drawImage(bufferedImage1, this.x, this.y, tileSize, tileSize, null);
-            } else {
+            } else if (spriteNum == 2) {
                 graphics2D.drawImage(bufferedImage2, this.x, this.y, tileSize, tileSize, null);
             }
 

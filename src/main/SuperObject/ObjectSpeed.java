@@ -1,6 +1,6 @@
 package SuperObject;
 
-import demo.ImagePath;
+import Implements.ImagePath;
 
 import javax.imageio.ImageIO;
 import java.io.File;
