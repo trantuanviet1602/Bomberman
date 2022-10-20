@@ -3,9 +3,9 @@ package demo.entity.Player;
 import SuperObject.Bomb.Bomb;
 import Implements.Constant;
 import SuperObject.Bomb.BombManager;
-import demo.GamePanel;
+import Game.GamePanel;
 import Implements.ImagePath;
-import demo.Keyboard;
+import Game.Keyboard;
 import demo.entity.Entity;
 
 import java.awt.*;
@@ -16,15 +16,18 @@ public class Player extends Entity implements Constant, ImagePath {
     public Bomb bomb;
     PlayerImage playerImage = new PlayerImage();
     public Keyboard keyboard;
+    public BombManager bombManager;
 
-    public Player(GamePanel gamePanel, Keyboard keyboard) {
+    public int bombLength;
+
+    public Player(GamePanel gamePanel, Keyboard keyboard, BombManager bombManager) {
         this.gamePanel = gamePanel;
         this.keyboard = keyboard;
+        this.bombManager = bombManager;
         setDefaultValues();
-        bomb = new Bomb(gamePanel);
 
         //TODO: Tạo vùng collision cho nhân vật.
-        solidArea = new Rectangle(this.x, this.y, tileSize - 10, tileSize - 2 );
+        solidArea = new Rectangle(this.x, this.y, tileSize - 10, tileSize - 3 );
     }
 
     public void setDefaultValues() {
@@ -32,6 +35,7 @@ public class Player extends Entity implements Constant, ImagePath {
         y = 32;
         speed = 2;
         direction = "down";
+        bombLength = 1;
     }
 
 
@@ -69,8 +73,6 @@ public class Player extends Entity implements Constant, ImagePath {
             }
 
             bombManager.killEntity(this);
-
-            bomb.update();
         }
 
         if(keyboard.up|| keyboard.down|| keyboard.left|| keyboard.right ) {
@@ -85,8 +87,8 @@ public class Player extends Entity implements Constant, ImagePath {
 
         if (death) {
             spriteCounter ++ ;
-            if (spriteCounter > 100) {
-                spriteNum = (spriteNum + 1);
+            if (spriteCounter > 20) {
+                if (deathSpriteNum != 3) deathSpriteNum = deathSpriteNum + 1;
                 spriteCounter = 0;
             }
         }
@@ -117,7 +119,11 @@ public class Player extends Entity implements Constant, ImagePath {
             }
         } else {
             try {
-                bufferedImage = playerImage.death[spriteNum];
+                if (deathSpriteNum <=2) {
+                    bufferedImage = playerImage.death[deathSpriteNum];
+                } else {
+                    bufferedImage = null;
+                }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -125,5 +131,11 @@ public class Player extends Entity implements Constant, ImagePath {
         graphics2D.drawImage(bufferedImage, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
     }
 
+    public void addBombs() {
+        bombManager.addBomb();
+    }
+    public void increaseBombLength() {
+        bombManager.increaseBombFlames();
+    }
 
 }

@@ -1,10 +1,8 @@
 package SuperObject.Bomb;
 
 import Implements.Constant;
-import demo.GamePanel;
+import Game.GamePanel;
 import Implements.ImagePath;
-import demo.entity.Balloom;
-import demo.entity.BalloomManager;
 import demo.entity.Entity;
 import demo.entity.Player.Player;
 
@@ -16,8 +14,9 @@ import java.io.File;
 
 public class Bomb extends Entity implements ImagePath, Constant {
     public boolean set = false;
-
     private int time = 0;
+
+    private int collisionTime = -15;
     private GamePanel gamePanel;
 
     public boolean exploded  = false;
@@ -41,6 +40,7 @@ public class Bomb extends Entity implements ImagePath, Constant {
             this.y = - tileSize;
             loadImage();
             explosion = new Explosion(gamePanel);
+            collisionTime = 0;
             this.gamePanel = gamePanel;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -48,30 +48,41 @@ public class Bomb extends Entity implements ImagePath, Constant {
 
     }
 
-    public void setBomb(Player player) {
-        if (!set) {
-            this.x = ((player.x + tileSize / 2) / tileSize) * tileSize;
-            this.y = ((player.y + tileSize / 2) / tileSize) * tileSize;
+    public void setBomb(Player player, BombManager bombManager) {
+        boolean check = true;
+        int tempX = ((player.x + tileSize / 2) / tileSize) * tileSize;
+        int tempY = ((player.y + tileSize / 2) / tileSize) * tileSize;
+        for (Bomb bomb : bombManager.bombs) {
+            if (bomb.checkCollision(tempX / tileSize + 1, tempY / tileSize + 1) && bomb.set) {
+                check = false;
+            }
+        }
+        if (check && !set) {
+            this.x = tempX;
+            this.y = tempY;
             set = true;
             time = 0;
+            collisionTime = 0;
             explosion = new Explosion(gamePanel);
-            explosion.setCoordinates(this);
+            explosion.setCoordinates(this, player);
             explosion.checkCollisionExploded();
         }
     }
 
     public void update() {
         if (set) {
+            collisionTime++;
             spriteCounter++;
             time ++;
             if (spriteCounter > 10) {
                 spriteNum = (spriteNum + 1) % 3;
                 spriteCounter = 0;
             }
+            if (collisionTime >= 500) collision = true;
         } else {
             spriteNum = -1;
         }
-        if (time == 100) {
+        if (time >= 100) {
             explode();
         }
     }
@@ -79,7 +90,10 @@ public class Bomb extends Entity implements ImagePath, Constant {
     public void explode() {
         exploded = true;
         explosion.update();
-        set = false;
+        if (explosion.spriteNum >= 3) {
+           set = false;
+           collision = false;
+        }
     }
 
 
@@ -87,7 +101,6 @@ public class Bomb extends Entity implements ImagePath, Constant {
         if (exploded) {
             explosion.draw(graphics2D);
             exploded = false;
-            //new Bomb(gamePanel);
         } else {
             if (spriteNum == 0) {
                 graphics2D.drawImage(bufferedImage, this.x, this.y, tileSize, tileSize , null);

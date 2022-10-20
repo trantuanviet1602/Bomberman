@@ -78,4 +78,22 @@ public interface ImagePath {
             , "src/res/sprite/balloom_right_1.png", "src/res/sprite/balloom_right_2.png"};
 
     String BALLOOM_DEATH = "src/res/sprite/balloom_dead.png";
+
+    String[] ONEAL_LEFT = {"src/res/sprite/oneal_left.png",
+            "src/res/sprite/oneal_left_1.png", "src/res/sprite/oneal_left_2.png"};
+
+    String[] ONEAL_RIGHT = {"src/res/sprite/oneal_right.png",
+            "src/res/sprite/oneal_right_1.png", "src/res/sprite/oneal_right_2.png"};
+
+    String ONEAL_DEATH = "src/res/sprite/oneal_death.png";
+
+
+    String BOMBPASS_OBJECT = "src/res/sprite/powerup_bombpass.png";
+
+    String DETONATOR_OBJECT = "src/res/sprite/powerup_detonator.png";
+    String FLAMEPASS_OBJECT = "src/res/sprite/powerup_flamepass.png";
+    String FLAMES_OBJECT = "src/res/sprite/powerup_flames.png";
+
+    String BOMBS_OBJECT = "src/res/sprite/powerup_bombpass.png";
+
 }

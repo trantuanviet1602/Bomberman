@@ -1,4 +1,4 @@
-package demo.entity;
+package demo.entity.Enemy.Balloom;
 
 import Implements.ImagePath;
 

@@ -1,16 +1,21 @@
 package demo.tile.wall;
 
+import Game.GamePanel;
 import Implements.Constant;
 
 import java.awt.*;
 import java.util.ArrayList;
+
+import SuperObject.Bomb.BombManager;
+import demo.entity.Player.EntityManagement;
+import demo.entity.Player.Player;
 import demo.tile.GameMap;
+import javafx.util.Pair;
 
-public class WallManager {
+public class WallManager extends EntityManagement {
     public ArrayList<Wall> walls = new ArrayList<>();
-    GameMap gameMap = new GameMap();
-
-    public WallManager() {
+    public WallManager(GamePanel gamePanel, GameMap gameMap) {
+        super(gamePanel, gameMap);
         for (int i = 0; i < gameMap.cols; i++) {
             for (int j = 0; j < gameMap.rows; j++) {
                 if (gameMap.mapTile[j].charAt(i) == '#') {
@@ -20,6 +25,16 @@ public class WallManager {
         }
     }
 
+    @Override
+    public void update(Player player) {}
+
+    @Override
+    public void update(Player player, BombManager bombManager) {}
+
+    @Override
+    public void update(BombManager bombManager) {}
+
+    @Override
     public void draw(Graphics2D graphics2D) {
         for (Wall wall : walls) {
             wall.draw(graphics2D);

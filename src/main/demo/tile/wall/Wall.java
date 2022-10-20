@@ -26,8 +26,5 @@ public class Wall extends Entity implements Constant{
         graphics2D.drawImage(bufferedImage, x, y, tileSize, tileSize, null);
     }
 
-    public boolean checkCollision(int x, int y) {
-        return x - 1 == this.x / tileSize  && y - 1 == this.y / tileSize;
-    }
 
 }

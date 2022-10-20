@@ -1,8 +1,6 @@
 package demo;
 
-import SuperObject.ObjectSpeed;
-
-import java.awt.*;
+import Game.GamePanel;
 
 public class AssetSetter {
     GamePanel gamePanel;
@@ -12,9 +10,6 @@ public class AssetSetter {
     }
 
     public void setObject() {
-        gamePanel.superObjects[0] = new ObjectSpeed();
-        gamePanel.superObjects[0].x = 32;
-        gamePanel.superObjects[0].y = 64;
     }
 
 

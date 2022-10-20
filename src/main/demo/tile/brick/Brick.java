@@ -23,7 +23,7 @@ public class Brick extends Entity implements ImagePath, Constant {
         if (death) {
             spriteCounter ++ ;
             if (spriteCounter > 10) {
-                spriteNum = (spriteNum + 1) % 3;
+                if (deathSpriteNum != 3) deathSpriteNum = deathSpriteNum + 1;
                 spriteCounter = 0;
             }
         }
@@ -31,14 +31,11 @@ public class Brick extends Entity implements ImagePath, Constant {
 
     public void draw(Graphics2D graphics2D) {
         if (death) {
-            graphics2D.drawImage(brickImage.brickExplosion[spriteNum],
+            graphics2D.drawImage(brickImage.brickExplosion[deathSpriteNum],
                     this.x, this.y, tileSize, tileSize, null);
         } else {
             graphics2D.drawImage(brickImage.brick, this.x, this.y, tileSize, tileSize, null);
         }
     }
 
-    public boolean checkCollision(int x, int y) {
-        return x - 1 == this.x / tileSize  && y - 1 == this.y / tileSize;
-    }
 }

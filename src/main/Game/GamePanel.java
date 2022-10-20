@@ -1,37 +1,41 @@
-package demo;
+package Game;
 
 import Implements.Constant;
 import SuperObject.Bomb.BombManager;
-import SuperObject.SuperObject;
-import demo.entity.BalloomManager;
+import SuperObject.Enhancement.EnhancementManager;
+import demo.entity.Enemy.Balloom.BalloomManager;
 import demo.entity.CollisionCheck;
+import demo.entity.Enemy.Oneal.OnealManager;
 import demo.entity.Player.Player;
+import demo.tile.GameMap;
 import demo.tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GamePanel extends JPanel implements Runnable, Constant {
     //Screen Settings
 
     Keyboard keyboard = new Keyboard();
-    public Player player = new Player(this, keyboard);
     public BombManager bombManager = new BombManager(this);
+    public Player player = new Player(this, keyboard, bombManager);
+    public GameMap gameMap = new GameMap();
 
-    public TileManager tileManager = new TileManager(this);
+
+    public TileManager tileManager = new TileManager(this, gameMap);
 
     //Game clock.
     Thread gameThread;
-    public CollisionCheck collisionCheck = new CollisionCheck(this);
+    public CollisionCheck collisionCheck = new CollisionCheck(this, bombManager, tileManager);
 
-    public SuperObject[] superObjects = new SuperObject[10];
-    public AssetSetter assetSetter = new AssetSetter(this);
+    public BalloomManager balloomManager = new BalloomManager(this, gameMap);
+    public OnealManager onealManager = new OnealManager(this, gameMap);
 
-    public BalloomManager balloomManager = new BalloomManager(this);
+    public EnhancementManager enhancementManager = new EnhancementManager(this, gameMap);
 
-    public void setupGame() {
-        assetSetter.setObject();
-    }
+
 
 
 
@@ -87,8 +91,10 @@ public class GamePanel extends JPanel implements Runnable, Constant {
 
     public void update() {
         player.update(bombManager);
+        enhancementManager.update(player);
         tileManager.update(bombManager);
         balloomManager.update(player, bombManager);
+        onealManager.update(player, bombManager);
         bombManager.update();
     }
 
@@ -96,15 +102,10 @@ public class GamePanel extends JPanel implements Runnable, Constant {
         super.paintComponent (graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
 
-
+        enhancementManager.draw(graphics2D);
         tileManager.draw(graphics2D);
-
-        for(int i = 0 ; i < 10 ; i ++ ) {
-            if(superObjects[i] != null) {
-                superObjects[i].draw(graphics2D);
-            }
-        }
         balloomManager.draw(graphics2D);
+        onealManager.draw(graphics2D);
         bombManager.draw(graphics2D);
         player.draw(graphics2D);
 

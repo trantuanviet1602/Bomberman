@@ -19,7 +19,7 @@ public class PlayerImage implements ImagePath {
             right = new BufferedImage[] {ImageIO.read(new File(RIGHT_PATH)),
                     ImageIO.read(new File(RIGHT1_PATH)), ImageIO.read(new File(RIGHT2_PATH))};
             death = new BufferedImage[] {ImageIO.read(new File(DEATH_PATH[0])),
-                    ImageIO.read(new File(UP1_PATH)), ImageIO.read(new File(DEATH_PATH[2]))};
+                    ImageIO.read(new File(DEATH_PATH[1])), ImageIO.read(new File(DEATH_PATH[2]))};
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

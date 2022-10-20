@@ -1,21 +1,20 @@
-package demo.entity;
+package demo.entity.Enemy.Balloom;
 
 import Implements.Constant;
 import SuperObject.Bomb.BombManager;
-import demo.GamePanel;
+import Game.GamePanel;
+import demo.entity.Enemy.Balloom.Balloom;
+import demo.entity.Player.EntityManagement;
 import demo.entity.Player.Player;
 import demo.tile.GameMap;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class BalloomManager {
+public class BalloomManager extends EntityManagement {
     public ArrayList<Balloom> ballooms = new ArrayList<>();
-    public GamePanel gamePanel;
-    private GameMap gameMap = new GameMap();
-
-    public BalloomManager(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
+    public BalloomManager(GamePanel gamePanel, GameMap gameMap) {
+        super(gamePanel, gameMap);
         for (int i = 0; i < gameMap.cols; i++) {
             for (int j = 0; j < gameMap.rows; j++) {
                 if (gameMap.mapTile[j].charAt(i) == '1') {
@@ -25,13 +24,22 @@ public class BalloomManager {
         }
     }
 
+    @Override
+    public void update(Player player) {}
+
+    @Override
     public void update(Player player, BombManager bombManager) {
         for (Balloom balloom : ballooms) {
             balloom.update(player, bombManager);
         }
-        ballooms.removeIf(balloom -> balloom.death);
+        //TODO: Xóa Balloom ra khỏi List khi Balloom đã chết và đã thực hiện xong animation chết.
+        ballooms.removeIf(balloom -> balloom.death && balloom.deathSpriteNum == 3);
     }
 
+    @Override
+    public void update(BombManager bombManager) {}
+
+    @Override
     public void draw(Graphics2D graphics2D) {
         for (Balloom balloom: ballooms) {
             balloom.draw(graphics2D);
