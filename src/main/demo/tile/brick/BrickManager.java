@@ -9,9 +9,11 @@ import demo.tile.GameMap;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BrickManager extends EntityManagement {
     public ArrayList<Brick> bricks = new ArrayList<>();
+
 
     public BrickManager(GamePanel gamePanel, GameMap gameMap) {
         super(gamePanel, gameMap);
@@ -33,12 +35,18 @@ public class BrickManager extends EntityManagement {
     public void update(Player player, BombManager bombManager) {}
 
     @Override
-    public void update(BombManager bombManager) {
-        for (Brick brick : bricks) {
-            brick.update(bombManager);
+    public void update(BombManager bombManager) {}
+
+    public void update(BombManager bombManager, boolean[][] mapCollision) {
+        for (Brick value : bricks) {
+            value.update(bombManager);
+            if (value.death) {
+                mapCollision[value.y / Constant.tileSize][value.x / Constant.tileSize] = false;
+            }
         }
         bricks.removeIf(brick -> brick.death && brick.deathSpriteNum == 3);
     }
+
 
     @Override
     public void draw(Graphics2D graphics2D) {

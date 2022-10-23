@@ -79,14 +79,21 @@ public interface ImagePath {
 
     String BALLOOM_DEATH = "src/res/sprite/balloom_dead.png";
 
-    String[] ONEAL_LEFT = {"src/res/sprite/oneal_left.png",
-            "src/res/sprite/oneal_left_1.png", "src/res/sprite/oneal_left_2.png"};
+    String[] KONDORIA_LEFT = {"src/res/sprite/kondoria_left.png",
+            "src/res/sprite/kondoria_left_1.png", "src/res/sprite/kondoria_left_2.png"};
 
-    String[] ONEAL_RIGHT = {"src/res/sprite/oneal_right.png",
-            "src/res/sprite/oneal_right_1.png", "src/res/sprite/oneal_right_2.png"};
+    String[] KONDORIA_RIGHT = {"src/res/sprite/kondoria_right.png",
+            "src/res/sprite/kondoria_right_1.png", "src/res/sprite/kondoria_right_2.png"};
+
+    String KONDORIA_DEATH = "src/res/sprite/kondoria_death.png";
+
+    String[] ONEAL_LEFT = {"src/res/sprite/oneal_left_1.png",
+            "src/res/sprite/oneal_left_2.png", "src/res/sprite/oneal_left_3.png"};
+
+    String[] ONEAL_RIGHT = {"src/res/sprite/oneal_right_1.png",
+            "src/res/sprite/oneal_right_2.png", "src/res/sprite/oneal_right_3.png"};
 
     String ONEAL_DEATH = "src/res/sprite/oneal_death.png";
-
 
     String BOMBPASS_OBJECT = "src/res/sprite/powerup_bombpass.png";
 

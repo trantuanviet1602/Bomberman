@@ -36,7 +36,7 @@ public class Explosion extends Entity implements ImagePath, Constant {
         //TODO: Thực hiện lấy tọa độ của Bomb trên bản đồ, để thực hiện CheckCollision.
         mapX = x / tileSize;
         mapY = y / tileSize;
-        //TODO: Khởi tạo các giá trị mặc định cho CheckCollision, kiểm tra từ Up -> Down và từ Left -> Right.
+        //TODO: Khởi tạo các giá trị mặc định cho CheckCollision.
         validLeft = 0;
         validRight = 0;
         validUp = 0;
@@ -61,10 +61,10 @@ public class Explosion extends Entity implements ImagePath, Constant {
 
     public boolean killed(Entity entity) {
         //TODO: Kiểm tra xem Bomb có giết được ai hay không.
-        return entity.x >= this.x - validLeft  * tileSize && entity.x <= this.x + (validRight + 1) * tileSize - 1
+        return entity.x >= this.x - validLeft  * tileSize - 1 && entity.x <= this.x + (validRight + 1) * tileSize - 3
                 && ((entity.y + tileSize / 2)/ tileSize ) * tileSize == this.y
                 || ((entity.x + tileSize / 2)/ tileSize ) * tileSize == this.x
-                && entity.y >= this.y - (validUp + 1) * tileSize && entity.y <= this.y + (validDown + 1) * tileSize - 1;
+                && entity.y >= this.y - (validUp) * tileSize - 1 && entity.y <= this.y + (validDown + 1) * tileSize - 3;
     }
 
     public void checkCollisionExploded() {
@@ -86,34 +86,6 @@ public class Explosion extends Entity implements ImagePath, Constant {
             else stopDown = true;
         }
 
-
-        /*for (int i = Math.max(0, mapX - bombLength);
-             i <= Math.min(maxScreenCol - 1, mapX + bombLength); i++) {
-            if (i < mapX) {
-                if (gamePanel.tileManager.gameMap.mapTile[mapY].charAt(i) == '#') {
-                    validLeft = Math.max(validLeft - mapX + i, 0);
-                }
-            } else if (i > mapX) {
-                if (gamePanel.tileManager.gameMap.mapTile[mapY].charAt(i) != '#') {
-                    validRight++;
-                }
-            }
-        }
-
-        for (int i = Math.max(0, mapY - bombLength);
-             i <= Math.min(maxScreenRow - 1, mapY + bombLength); i++) {
-            if (i < mapY) {
-                if (gamePanel.tileManager.gameMap.mapTile[i].charAt(mapX) == '#') {
-                    validUp = Math.max(validUp - mapY + i, 0);
-                }
-            } else if (i > mapY) {
-                if (gamePanel.tileManager.gameMap.mapTile[i].charAt(mapX) != '#') {
-                    validDown++;
-                }
-            }
-        }*/
-        System.out.println(mapX + " " + mapY);
-        System.out.println(validUp + " " + validDown + " " + validLeft + " " + validRight);
     }
 
     public boolean isExploding() {

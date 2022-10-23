@@ -3,6 +3,7 @@ package SuperObject.Bomb;
 import Implements.Constant;
 import Game.GamePanel;
 import Implements.ImagePath;
+import demo.Sound.SoundPath;
 import demo.entity.Entity;
 import demo.entity.Player.Player;
 
@@ -17,6 +18,8 @@ public class Bomb extends Entity implements ImagePath, Constant {
     private int time = 0;
 
     private int collisionTime = -15;
+
+    private boolean soundExploded;
     private GamePanel gamePanel;
 
     public boolean exploded  = false;
@@ -58,6 +61,8 @@ public class Bomb extends Entity implements ImagePath, Constant {
             }
         }
         if (check && !set) {
+            soundExploded = false;
+            gamePanel.playSE(SoundPath.BOMB_SET);
             this.x = tempX;
             this.y = tempY;
             set = true;
@@ -78,7 +83,7 @@ public class Bomb extends Entity implements ImagePath, Constant {
                 spriteNum = (spriteNum + 1) % 3;
                 spriteCounter = 0;
             }
-            if (collisionTime >= 500) collision = true;
+            if (collisionTime >= 20) collision = true;
         } else {
             spriteNum = -1;
         }
@@ -90,6 +95,10 @@ public class Bomb extends Entity implements ImagePath, Constant {
     public void explode() {
         exploded = true;
         explosion.update();
+        if(!soundExploded) {
+            gamePanel.playSE(SoundPath.BOMB_EXPLODE);
+            soundExploded = true;
+        }
         if (explosion.spriteNum >= 3) {
            set = false;
            collision = false;

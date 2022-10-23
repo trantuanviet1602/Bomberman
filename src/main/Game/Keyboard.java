@@ -1,11 +1,19 @@
 package Game;
 
+import Implements.Constant;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Keyboard implements KeyListener {
+
+    private final GamePanel gamePanel;
     public boolean up, down, left, right;
     public boolean space;
+
+    public Keyboard(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
 
     @Override
     public void keyTyped(KeyEvent keyEvent) {
@@ -30,6 +38,10 @@ public class Keyboard implements KeyListener {
         }
         if (code == KeyEvent.VK_SPACE) {
             space = true;
+        }
+        if (code == KeyEvent.VK_P) {
+            if (gamePanel.gameState == Constant.pauseState) gamePanel.gameState = Constant.playState;
+            else if (gamePanel.gameState == Constant.playState) gamePanel.gameState = Constant.pauseState;
         }
     }
 

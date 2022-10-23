@@ -11,7 +11,6 @@ public class Enhancement extends Entity implements Constant {
     public void update(Player player) {
         if (checkCollision((player.x + tileSize / 2) / tileSize + 1, (player.y + tileSize / 2) / tileSize + 1)) {
             this.death = true;
-            System.out.println("yes");
         }
     }
     public BufferedImage bufferedImage;

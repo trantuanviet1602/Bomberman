@@ -4,7 +4,8 @@ import Implements.Constant;
 import Game.GamePanel;
 import SuperObject.Bomb.Bomb;
 import SuperObject.Bomb.BombManager;
-import SuperObject.Bomb.Explosion;
+
+import demo.entity.Enemy.Kondoria.Kondoria;
 import demo.tile.TileManager;
 import demo.tile.brick.Brick;
 import demo.tile.wall.Wall;
@@ -27,8 +28,7 @@ public class CollisionCheck implements Constant {
         int entityTop = entity.y + entity.solidArea.y;
         int entityDown = entity.y + entity.solidArea.y + entity.solidArea.height;
 
-
-        for (Wall wall: TileManager.wallManager.walls) {
+        for (Wall wall: tileManager.wallManager.walls) {
             if (entity.direction.equals("left") &&
                     (wall.checkCollision((entityLeft - entity.speed) / tileSize, entityDown / tileSize  )
                             || wall.checkCollision((entityLeft - entity.speed) / tileSize, entityTop / tileSize ))) {
@@ -54,59 +54,60 @@ public class CollisionCheck implements Constant {
                 break;
             }
         }
-
-        for (Brick brick: TileManager.brickManager.bricks) {
-            if (entity.direction.equals("left") &&
-                    (brick.checkCollision((entityLeft - entity.speed) / tileSize, entityDown / tileSize  )
-                            || brick.checkCollision((entityLeft - entity.speed) / tileSize, entityTop / tileSize ))) {
-                entity.leftCollision = true;
-                break;
-            }
-            if (entity.direction.equals("right") &&
-                    (brick.checkCollision((entityRight + entity.speed) / tileSize, entityDown / tileSize  )
-                            || brick.checkCollision((entityRight + entity.speed) / tileSize, entityTop / tileSize ))) {
-                entity.rightCollision = true;
-                break;
-            }
-            if (entity.direction.equals("up") &&
-                    (brick.checkCollision(entityRight / tileSize, (entityTop - entity.speed) / tileSize  )
-                            || brick.checkCollision(entityLeft / tileSize, (entityTop - entity.speed) / tileSize ))) {
-                entity.upCollision = true;
-                break;
-            }
-            if (entity.direction.equals("down") &&
-                    (brick.checkCollision(entityRight / tileSize, (entityDown + entity.speed) / tileSize  )
-                            || brick.checkCollision(entityLeft / tileSize, (entityDown + entity.speed) / tileSize ))) {
-                entity.downCollision = true;
-                break;
-            }
-        }
-
-        for (Bomb bomb: bombManager.bombs) {
-            if (bomb.collision) {
+        if (!(entity instanceof Kondoria)) {
+            for (Brick brick: tileManager.brickManager.bricks) {
                 if (entity.direction.equals("left") &&
-                        (bomb.checkCollision((entityLeft - entity.speed) / tileSize, entityDown / tileSize  )
-                                || bomb.checkCollision((entityLeft - entity.speed) / tileSize, entityTop / tileSize ))) {
+                        (brick.checkCollision((entityLeft - entity.speed) / tileSize, entityDown / tileSize  )
+                                || brick.checkCollision((entityLeft - entity.speed) / tileSize, entityTop / tileSize ))) {
                     entity.leftCollision = true;
                     break;
                 }
                 if (entity.direction.equals("right") &&
-                        (bomb.checkCollision((entityRight + entity.speed) / tileSize, entityDown / tileSize  )
-                                || bomb.checkCollision((entityRight + entity.speed) / tileSize, entityTop / tileSize ))) {
+                        (brick.checkCollision((entityRight + entity.speed) / tileSize, entityDown / tileSize  )
+                                || brick.checkCollision((entityRight + entity.speed) / tileSize, entityTop / tileSize ))) {
                     entity.rightCollision = true;
                     break;
                 }
                 if (entity.direction.equals("up") &&
-                        (bomb.checkCollision(entityRight / tileSize, (entityTop - entity.speed) / tileSize  )
-                                || bomb.checkCollision(entityLeft / tileSize, (entityTop - entity.speed) / tileSize ))) {
+                        (brick.checkCollision(entityRight / tileSize, (entityTop - entity.speed) / tileSize  )
+                                || brick.checkCollision(entityLeft / tileSize, (entityTop - entity.speed) / tileSize ))) {
                     entity.upCollision = true;
                     break;
                 }
                 if (entity.direction.equals("down") &&
-                        (bomb.checkCollision(entityRight / tileSize, (entityDown + entity.speed) / tileSize  )
-                                || bomb.checkCollision(entityLeft / tileSize, (entityDown + entity.speed) / tileSize ))) {
+                        (brick.checkCollision(entityRight / tileSize, (entityDown + entity.speed) / tileSize  )
+                                || brick.checkCollision(entityLeft / tileSize, (entityDown + entity.speed) / tileSize ))) {
                     entity.downCollision = true;
                     break;
+                }
+            }
+
+            for (Bomb bomb: bombManager.bombs) {
+                if (bomb.collision) {
+                    if (entity.direction.equals("left") &&
+                            (bomb.checkCollision((entityLeft - entity.speed) / tileSize, entityDown / tileSize  )
+                                    || bomb.checkCollision((entityLeft - entity.speed) / tileSize, entityTop / tileSize ))) {
+                        entity.leftCollision = true;
+                        break;
+                    }
+                    if (entity.direction.equals("right") &&
+                            (bomb.checkCollision((entityRight + entity.speed) / tileSize, entityDown / tileSize  )
+                                    || bomb.checkCollision((entityRight + entity.speed) / tileSize, entityTop / tileSize ))) {
+                        entity.rightCollision = true;
+                        break;
+                    }
+                    if (entity.direction.equals("up") &&
+                            (bomb.checkCollision(entityRight / tileSize, (entityTop - entity.speed) / tileSize  )
+                                    || bomb.checkCollision(entityLeft / tileSize, (entityTop - entity.speed) / tileSize ))) {
+                        entity.upCollision = true;
+                        break;
+                    }
+                    if (entity.direction.equals("down") &&
+                            (bomb.checkCollision(entityRight / tileSize, (entityDown + entity.speed) / tileSize  )
+                                    || bomb.checkCollision(entityLeft / tileSize, (entityDown + entity.speed) / tileSize ))) {
+                        entity.downCollision = true;
+                        break;
+                    }
                 }
             }
         }

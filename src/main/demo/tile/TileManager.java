@@ -4,6 +4,7 @@ import Implements.Constant;
 import SuperObject.Bomb.BombManager;
 import Game.GamePanel;
 import Implements.ImagePath;
+import demo.tile.brick.Brick;
 import demo.tile.brick.BrickManager;
 import demo.tile.wall.Wall;
 import demo.tile.wall.WallManager;
@@ -14,10 +15,11 @@ import java.util.HashMap;
 
 public class TileManager implements ImagePath, Constant {
     GamePanel gamePanel;
-    public static BrickManager brickManager;
-    public static WallManager wallManager;
+    public BrickManager brickManager;
+    public WallManager wallManager;
     public GameMap gameMap;
 
+    public boolean[][] mapCollision;
     public HashMap<Integer, Integer> tileHash = new HashMap<>();
 
 
@@ -27,16 +29,20 @@ public class TileManager implements ImagePath, Constant {
     public TileManager(GamePanel gamePanel, GameMap gameMap) {
         this.gamePanel = gamePanel;
         this.gameMap = gameMap;
+        mapCollision = new boolean[gameMap.rows][gameMap.cols];
         brickManager = new BrickManager(this.gamePanel, this.gameMap);
         wallManager = new WallManager(this.gamePanel, this.gameMap);
         for (Wall wall : wallManager.walls) {
-            tileHash.put(wall.x, wall.y);
+            mapCollision[wall.y / tileSize][wall.x / tileSize] = true;
+        }
+        for (Brick brick: brickManager.bricks) {
+            mapCollision[brick.y / tileSize][brick.x / tileSize] = true;
         }
 
     }
 
     public void update(BombManager bombManager) {
-        brickManager.update(bombManager);
+        brickManager.update(bombManager, mapCollision);
     }
 
 
