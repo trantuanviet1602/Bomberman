@@ -11,7 +11,7 @@ import javafx.util.Pair;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Objects;
+
 
 public class Oneal extends Enemy {
     OnealImage onealImage = new OnealImage();
@@ -19,25 +19,27 @@ public class Oneal extends Enemy {
     private int rowPlayer, colPlayer;
     private int colX, rowY;
     private int moveCounter = 0;
-
-    private int delayCounter = 50, currentPosition;
-
-
+    private int delayCounter = 100, currentPosition;
     private ArrayList<Pair<Integer, Integer>> closed = new ArrayList<>(), opened = new ArrayList<>(),
             chasePath = new ArrayList<>();
     public Oneal(int x, int y, GamePanel gamePanel) {
         this.x = x;
         this.y = y;
-        solidArea = new Rectangle(32, 32, Constant.tileSize - 2 , Constant.tileSize - 2);
+        solidArea = new Rectangle(32, 32, Constant.tileSize - 1 , Constant.tileSize - 1);
         this.gamePanel = gamePanel;
         this.direction = "left";
         this.speed = 1;
         this.lengthToCoordinate = new double[gamePanel.tileManager.gameMap.rows][gamePanel.tileManager.gameMap.cols];
     }
+
+    /**
+     * TODO: di chuyển Oneal đến vị trí chỉ định khi thực hiện truy đuổi.
+     */
     public void moveTo(int x, int y) {
-        if (this.x != x && Math.abs(this.y - y) <= 1) {
-           // moveCounter++;
-            //if (moveCounter >= 2) {
+        if (this.x != x && this.y != y) {
+            this.x = x;
+            this.y = y;
+        } else if (this.x != x) {
                 if (this.x > x) {
                     this.x -= speed;
                     direction = "left";
@@ -49,10 +51,8 @@ public class Oneal extends Enemy {
                 moveCounter = 0;
             }
 
-        //}
-        if (this.y != y && Math.abs(this.x - x) <= 1) {
+        else if (this.y != y) {
             moveCounter++;
-           // if(moveCounter >= 2) {
                 if (this.y > y) {
                     this.y -= speed;
                     direction = "up";
@@ -61,39 +61,42 @@ public class Oneal extends Enemy {
                     this.y += speed;
                     direction = "down";
                 }
-               // moveCounter = 0;
             }
 
-        }
-    //}
-
-    public boolean isPosition(int x, int y) {
-        return Math.abs(this.x - x) <= 1
-                && Math.abs(this.y - y) <= 1;
     }
 
+    public boolean isPosition(Pair<Integer, Integer> pair) {
+        return this.x == pair.getValue() * Constant.tileSize && pair.getKey() * Constant.tileSize == this.y;
+    }
+
+
+    /**
+     * TODO: Set các giá trị để thực hiện thuật toán A*.
+     */
     public void setupCoordinate(Player player) {
        // long s = System.nanoTime();
-        colPlayer = (player.x + Constant.tileSize / 2) / Constant.tileSize;
-        rowPlayer = (player.y + Constant.tileSize / 2) / Constant.tileSize;
+        colPlayer = (player.getX() + Constant.tileSize / 2) / Constant.tileSize;
+        rowPlayer = (player.getY() + Constant.tileSize / 2) / Constant.tileSize;
         colX = (this.x + Constant.tileSize / 2) / Constant.tileSize;
         rowY = (this.y + Constant.tileSize / 2) / Constant.tileSize;
-        if (distance(colPlayer, rowPlayer) <= 10) {
-            for (int i = 0; i < gamePanel.gameMap.rows; i++) {
-                for (int j = 0; j < gamePanel.gameMap.cols; j++) {
+        if (distance(colPlayer, rowPlayer) <= 100) {
+            for (int i = 0; i < gamePanel.getGameMap().getRows(); i++) {
+                for (int j = 0; j < gamePanel.getGameMap().getCols(); j++) {
                     if(!gamePanel.tileManager.mapCollision[i][j])
                         lengthToCoordinate[i][j] = Math.abs(colX - j) + Math.abs(rowY - i)
-                                + Math.sqrt(Math.pow(Math.abs(colX - j) + 1, 2) + Math.pow(Math.abs(rowY - i) + 1, 2));
+                                + Math.sqrt(Math.pow(Math.abs(colPlayer - j) + 1, 2) + Math.pow(Math.abs(rowPlayer - i) + 1, 2));
                     else lengthToCoordinate[i][j] = 0;
                 }
             }
             lengthToCoordinate[rowPlayer][colPlayer] =
                     Math.sqrt(Math.pow(Math.abs(colX - colPlayer) + 1, 2) + Math.pow(Math.abs(rowY - rowPlayer) + 1, 2));
         }
-
-       // System.out.println(System.nanoTime() - s);
     }
 
+    /**
+     * i: Row. j : Col.
+     * TODO: Thăm 1 điểm được xác định. Sẽ đưa vào các list opened và closed để thực hiện thuật toán A*.
+     */
     public void visit(int i, int j) {
         closed.add(new Pair<>(i,j));
         opened.remove(new Pair<>(i,j));
@@ -116,11 +119,16 @@ public class Oneal extends Enemy {
     }
 
     /**
-     * Sử dụng thuật toán A* để tạo AI cho Oneal.
+     * TODO: Sử dụng thuật toán A* để tạo AI cho Oneal.
      */
     public ArrayList<Pair<Integer, Integer>> AstarFindingPath() {
         ArrayList<Pair<Integer, Integer>> finalPath = new ArrayList<>();
+        opened = new ArrayList<>();
+        closed = new ArrayList<>();
         visit(rowY, colX);
+
+        //TODO: Tạo danh sách closed chứa các điểm đã xét. sẽ dừng lại vòng lặp khi visit được đến vị trí Player.
+
         Pair<Integer, Integer> temp;
         while(!closed.contains(new Pair<>(rowPlayer, colPlayer))) {
             temp = new Pair<>(0, 0);
@@ -137,34 +145,50 @@ public class Oneal extends Enemy {
             if (temp.getKey()!=0 &&temp.getValue()!=0){
                 visit(temp.getKey(), temp.getValue());
             }
-            if(opened.isEmpty()) {
-                return null;
+            if(opened.isEmpty() && !closed.contains(new Pair<>(rowPlayer, colPlayer))) {
+                break;
             }
         }
 
+        //TODO: Tìm ra đường đi ngắn nhất từ danh sách Closed bằng cách lấy phần tử gần nhất thỏa mãn kế bên điểm cuối.
+
+        int index = closed.size() - 1;
         if(closed.contains(new Pair<>(rowPlayer, colPlayer))) {
             finalPath.add(new Pair<>(rowPlayer, colPlayer));
-            while (!finalPath.contains(new Pair<>(rowY, colX))) {
-                for (Pair<Integer, Integer> integerIntegerPair : closed) {
-                    if (((integerIntegerPair.getKey() - 1 == finalPath.get(finalPath.size() - 1).getKey() ||
-                            integerIntegerPair.getKey() + 1 == finalPath.get(finalPath.size() - 1).getKey())
-                            && Objects.equals(integerIntegerPair.getValue(), finalPath.get(finalPath.size() - 1).getValue()))
-                            || ((integerIntegerPair.getValue() - 1 == finalPath.get(finalPath.size() - 1).getValue() ||
-                            integerIntegerPair.getValue() + 1 == finalPath.get(finalPath.size() - 1).getValue())
-                            && Objects.equals(integerIntegerPair.getKey(), finalPath.get(finalPath.size() - 1).getKey()))) {
-                        finalPath.add(integerIntegerPair);
+            while (finalPath.get(finalPath.size() - 1) != closed.get(0)) {
+                for (int i = 0; i <= index; i++) {
+                    if ((Math.abs(finalPath.get(finalPath.size() - 1).getKey() - closed.get(i).getKey()) == 1
+                    && finalPath.get(finalPath.size() - 1).getValue() == closed.get(i).getValue())
+                   || (Math.abs(finalPath.get(finalPath.size() - 1).getValue() - closed.get(i).getValue()) == 1
+                            && finalPath.get(finalPath.size() - 1).getKey() == closed.get(i).getKey())) {
+                        finalPath.add(closed.get(i));
+                        index = i;
+                        break;
+                    }
+                    if (index == 0) {
+                        finalPath.add(closed.get(0));
                         break;
                     }
                 }
             }
+        } else {
+            currentPosition = 0;
+            return null;
         }
         currentPosition = finalPath.size() - 1;
         return finalPath;
     }
 
+    /**
+     * TODO: Tính toán khoảng cách giữa Player và Oneal, nếu nhỏ hơn khoảng cho trước thì có thể truy đuổi.
+     */
     public double distance(int x, int y) {
         return Math.sqrt(Math.pow(x - colX, 2) + Math.pow(y - rowY, 2));
     }
+
+    /**
+     * TODO: Di chuyển ngẫu nhiên nếu như chưa thể truy đuổi đến nhân vật. Cài đặt tương tự như Ballom.
+     */
     public void moveRandom() {
         upCollision = false;
         downCollision = false;
@@ -251,41 +275,47 @@ public class Oneal extends Enemy {
         }
     }
 
+    /**
+     * TODO: Update trạng thái và vị trí cho Oneal.
+     */
     @Override
     public void update(Player player, BombManager bombManager) {
         if(!death) {
-            colPlayer = (player.x + Constant.tileSize / 2) / Constant.tileSize;
-            rowPlayer = (player.y + Constant.tileSize / 2) / Constant.tileSize;
-            colX = (this.x + Constant.tileSize / 2) / Constant.tileSize;
-            rowY = (this.y + Constant.tileSize / 2) / Constant.tileSize;
-            if (distance(colPlayer, rowPlayer) <= 100) {
-                delayCounter ++;
-                if(delayCounter >= 50) {
+            delayCounter ++;
+            setupCoordinate(player);
+            if (delayCounter >= 100) {
+                chasePath = AstarFindingPath();
+                delayCounter = 0;
+            }
+
+            if (chasePath == null || distance(colPlayer, rowPlayer) >= 15) {
+                moveRandom();
+            } else {
+                if (!isPosition(chasePath.get(currentPosition)) && currentPosition != 0) {
+                    moveTo(chasePath.get(currentPosition).getValue() * Constant.tileSize,
+                            chasePath.get(currentPosition).getKey() * Constant.tileSize);
+                    System.out.println(chasePath.get(currentPosition));
+                    System.out.println(rowY + " " + colX);
+                    System.out.println(this.y + " " + this.x);
+                } else if (currentPosition != 0) {
+                    delayCounter += 15;
+                    currentPosition --;
+                    if (chasePath.size() - currentPosition == 3) {
+                        setupCoordinate(player);
+                        chasePath = AstarFindingPath();
+                        currentPosition --;
+                    }
+
+                } else {
                     setupCoordinate(player);
                     chasePath = AstarFindingPath();
                 }
-                    if (chasePath!= null && currentPosition != 0) {
-                        System.out.println(this.x + " " + this.y);
-                            if (!isPosition(chasePath.get(currentPosition).getValue() * Constant.tileSize,
-                                    chasePath.get(currentPosition).getKey() * Constant.tileSize)) {
-                                moveTo(chasePath.get(currentPosition).getValue() * Constant.tileSize,
-                                        chasePath.get(currentPosition).getKey() * Constant.tileSize);
-                            } else {
-                                currentPosition--;
-                                delayCounter = 0;
-                            }
+            }
 
-                    } else if (chasePath != null){
-                        moveTo(player.x, player.y);
-                    } else {
-                        moveRandom();
-                    }
-                } else {
 
-                moveRandom();
-                }
             killPlayer(player);
             bombManager.killEntity(this);
+            //TODO: Tạo Animation cho Oneal.
             spriteCounter++;
             if (spriteCounter > 10) {
                 spriteNum = (spriteNum + 1) % 3;
@@ -323,6 +353,6 @@ public class Oneal extends Enemy {
     public static void main(String[] args) {
         Oneal oneal = new Oneal(Constant.tileSize * 16, Constant.tileSize * 9, new GamePanel());
         oneal.setupCoordinate(new Player(new GamePanel(), new Keyboard(new GamePanel()), new BombManager(new GamePanel())));
-        System.out.println(oneal.AstarFindingPath());
+
     }
 }

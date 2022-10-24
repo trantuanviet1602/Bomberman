@@ -2,6 +2,8 @@ package Implements;
 
 public interface ImagePath {
 
+    String TITLE_PATH = "src/res/sprite/bomberman.png";
+
     /**
      * Player path.
      */
@@ -103,4 +105,5 @@ public interface ImagePath {
 
     String BOMBS_OBJECT = "src/res/sprite/powerup_bombpass.png";
 
+    String PORTAL = "src/res/sprite/portal.png";
 }

@@ -1,6 +1,7 @@
 package SuperObject.Enhancement;
 
 import Implements.Constant;
+import demo.Sound.SoundPath;
 import demo.entity.Entity;
 import demo.entity.Player.Player;
 
@@ -9,8 +10,11 @@ import java.awt.image.BufferedImage;
 
 public class Enhancement extends Entity implements Constant {
     public void update(Player player) {
-        if (checkCollision((player.x + tileSize / 2) / tileSize + 1, (player.y + tileSize / 2) / tileSize + 1)) {
+        if (checkCollision((player.getX() + tileSize / 2) / tileSize + 1, (player.getY() + tileSize / 2) / tileSize + 1)) {
             this.death = true;
+        }
+        if (this.isDeath()) {
+            gamePanel.playSE(SoundPath.ITEM_ADD);
         }
     }
     public BufferedImage bufferedImage;

@@ -9,29 +9,24 @@ import javax.swing.plaf.ComponentUI;
 import java.awt.*;
 
 public abstract class Entity {
-    public int x,y;
-    public int speed;
+    protected int x,y;
+    protected int speed;
+    protected boolean death  = false;
 
+    protected String direction = "";
 
-    public boolean death  = false;
+    protected int spriteCounter = 0;
+    protected int spriteNum = 0;
 
-    public String direction = "";
+    protected int deathSpriteNum = 0;
 
-    public int spriteCounter = 0;
-    public int spriteNum = 0;
+    protected Rectangle solidArea;
+    protected boolean upCollision, rightCollision, downCollision, leftCollision = false;
 
-    public int deathSpriteNum = 0;
+    protected GamePanel gamePanel;
 
-    public Rectangle solidArea;
-    public boolean upCollision, rightCollision, downCollision, leftCollision = false;
+    protected boolean collision;
 
-    public GamePanel gamePanel;
-
-    public boolean collision;
-
-    public boolean checkPosition(Player player) {
-       return true;
-    }
 
     public void draw(Graphics2D graphics2D) {};
     public void update(BombManager bombManager) {};
@@ -40,5 +35,23 @@ public abstract class Entity {
         return x - 1 == this.x / Constant.tileSize  && y - 1 == this.y / Constant.tileSize;
     }
 
+    public int getX() {
+        return x;
+    }
 
+    public int getY() {
+        return y;
+    }
+
+    public int getDeathSpriteNum() {
+        return deathSpriteNum;
+    }
+
+    public boolean isDeath() {
+        return death;
+    }
+
+    public void setDeath(boolean death) {
+        this.death = death;
+    }
 }

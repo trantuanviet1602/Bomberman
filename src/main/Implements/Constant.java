@@ -10,6 +10,8 @@ public interface Constant {
     int screenWidth = maxScreenCol * tileSize;
     int screenHeight = tileSize * maxScreenRow;
 
+    int titleState = 0;
+
     int playState = 1;
     int pauseState = 2;
 

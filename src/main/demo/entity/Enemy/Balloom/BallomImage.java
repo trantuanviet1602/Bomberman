@@ -6,10 +6,10 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class BalloomImage implements ImagePath{
+public class BallomImage implements ImagePath{
     public BufferedImage[] left, right;
     public BufferedImage death;
-    public BalloomImage() {
+    public BallomImage() {
         try {
             left = new BufferedImage[] {ImageIO.read(new File(BALLOOM_LEFT[0])),
                     ImageIO.read(new File(BALLOOM_LEFT[1])), ImageIO.read(new File(BALLOOM_LEFT[2]))};

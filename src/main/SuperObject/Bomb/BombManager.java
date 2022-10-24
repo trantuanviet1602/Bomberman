@@ -4,6 +4,7 @@ import Game.GamePanel;
 import demo.entity.Entity;
 import demo.entity.Player.EntityManagement;
 import demo.entity.Player.Player;
+import demo.tile.TileManager;
 import javafx.util.Pair;
 
 import java.awt.*;
@@ -28,25 +29,25 @@ public class BombManager extends EntityManagement {
     @Override
     public void update(BombManager bombManager) {}
 
-    public void setBomb(Player player) {
+    public void setBomb(Player player, TileManager tileManager) {
         for (Bomb bomb : bombs) {
             if (!bomb.set) {
-                bomb.setBomb(player, this);
+                bomb.setBomb(player, this, tileManager);
                 break;
             }
         }
     }
 
-    public void update() {
+    public void update(TileManager tileManager) {
         for (Bomb bomb : bombs) {
-            bomb.update();
+            bomb.update(tileManager, this);
         }
     }
 
     public void killEntity(Entity entity) {
         for (Bomb bomb: bombs) {
             if (bomb.explosion.isExploding() && bomb.explosion.killed(entity)) {
-                entity.death = true;
+                entity.setDeath(true);
             }
         }
     }

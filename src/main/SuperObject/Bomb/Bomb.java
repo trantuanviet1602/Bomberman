@@ -6,6 +6,7 @@ import Implements.ImagePath;
 import demo.Sound.SoundPath;
 import demo.entity.Entity;
 import demo.entity.Player.Player;
+import demo.tile.TileManager;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -51,10 +52,10 @@ public class Bomb extends Entity implements ImagePath, Constant {
 
     }
 
-    public void setBomb(Player player, BombManager bombManager) {
+    public void setBomb(Player player, BombManager bombManager, TileManager tileManager) {
         boolean check = true;
-        int tempX = ((player.x + tileSize / 2) / tileSize) * tileSize;
-        int tempY = ((player.y + tileSize / 2) / tileSize) * tileSize;
+        int tempX = ((player.getX() + tileSize / 2) / tileSize) * tileSize;
+        int tempY = ((player.getY() + tileSize / 2) / tileSize) * tileSize;
         for (Bomb bomb : bombManager.bombs) {
             if (bomb.checkCollision(tempX / tileSize + 1, tempY / tileSize + 1) && bomb.set) {
                 check = false;
@@ -70,11 +71,11 @@ public class Bomb extends Entity implements ImagePath, Constant {
             collisionTime = 0;
             explosion = new Explosion(gamePanel);
             explosion.setCoordinates(this, player);
-            explosion.checkCollisionExploded();
+            explosion.checkCollisionExploded(tileManager);
         }
     }
 
-    public void update() {
+    public void update(TileManager tileManager, BombManager bombManager) {
         if (set) {
             collisionTime++;
             spriteCounter++;
@@ -83,16 +84,18 @@ public class Bomb extends Entity implements ImagePath, Constant {
                 spriteNum = (spriteNum + 1) % 3;
                 spriteCounter = 0;
             }
-            if (collisionTime >= 20) collision = true;
+            if (collisionTime >= 40) collision = true;
+            tileManager.mapCollision[this.y/tileSize][this.x/tileSize] = true;
+            bombManager.killEntity(this);
         } else {
             spriteNum = -1;
         }
-        if (time >= 100) {
-            explode();
+        if (time >= 100 || this.death) {
+            explode(tileManager);
         }
     }
 
-    public void explode() {
+    public void explode(TileManager tileManager) {
         exploded = true;
         explosion.update();
         if(!soundExploded) {
@@ -102,6 +105,8 @@ public class Bomb extends Entity implements ImagePath, Constant {
         if (explosion.spriteNum >= 3) {
            set = false;
            collision = false;
+           tileManager.mapCollision[this.y/tileSize][this.x/tileSize] = false;
+           this.death = false;
         }
     }
 

@@ -33,10 +33,10 @@ public class TileManager implements ImagePath, Constant {
         brickManager = new BrickManager(this.gamePanel, this.gameMap);
         wallManager = new WallManager(this.gamePanel, this.gameMap);
         for (Wall wall : wallManager.walls) {
-            mapCollision[wall.y / tileSize][wall.x / tileSize] = true;
+            mapCollision[wall.getY() / tileSize][wall.getX() / tileSize] = true;
         }
         for (Brick brick: brickManager.bricks) {
-            mapCollision[brick.y / tileSize][brick.x / tileSize] = true;
+            mapCollision[brick.getY() / tileSize][brick.getX() / tileSize] = true;
         }
 
     }

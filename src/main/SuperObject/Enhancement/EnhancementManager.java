@@ -18,11 +18,11 @@ public class EnhancementManager  extends EntityManagement {
         for (int i = 0 ; i < gameMap.rows; i++) {
             for (int j = 0; j < gameMap.cols; j++) {
                 if (gameMap.mapTile[i].charAt(j) == 'b') {
-                    enhancements.add(new ObjectBombs(j * Constant.tileSize, i * Constant.tileSize));
+                    enhancements.add(new ObjectBombs(j * Constant.tileSize, i * Constant.tileSize, gamePanel));
                 } else if (gameMap.mapTile[i].charAt(j) == 's') {
-                    enhancements.add(new ObjectSpeed(j * Constant.tileSize, i * Constant.tileSize));
+                    enhancements.add(new ObjectSpeed(j * Constant.tileSize, i * Constant.tileSize, gamePanel));
                 } else if (gameMap.mapTile[i].charAt(j) == 'f') {
-                    enhancements.add(new ObjectFlames(j * Constant.tileSize, i * Constant.tileSize));
+                    enhancements.add(new ObjectFlames(j * Constant.tileSize, i * Constant.tileSize, gamePanel));
                 }
             }
         }
@@ -33,7 +33,7 @@ public class EnhancementManager  extends EntityManagement {
         for (Enhancement enhancement: enhancements) {
             enhancement.update(player);
         }
-        enhancements.removeIf(enhancement -> enhancement.death);
+        enhancements.removeIf(enhancement -> enhancement.isDeath());
     }
 
     @Override

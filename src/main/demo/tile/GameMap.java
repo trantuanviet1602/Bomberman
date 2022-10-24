@@ -11,6 +11,14 @@ public class GameMap implements Constant {
 
     public int cols, rows;
 
+    public int getCols() {
+        return cols;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
     public GameMap() {
         try {
             loadMap();

@@ -7,6 +7,7 @@ import Game.GamePanel;
 import Implements.ImagePath;
 import Game.Keyboard;
 import demo.entity.Entity;
+import demo.tile.TileManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -41,7 +42,7 @@ public class Player extends Entity implements Constant, ImagePath {
 
 
 
-    public void update(BombManager bombManager) {
+    public void update(BombManager bombManager, TileManager tileManager) {
         if (!death) {
             upCollision = false;
             downCollision = false;
@@ -69,7 +70,7 @@ public class Player extends Entity implements Constant, ImagePath {
             }
 
             if (keyboard.space) {
-                bombManager.setBomb(this);
+                bombManager.setBomb(this, tileManager);
             }
 
             bombManager.killEntity(this);
@@ -134,8 +135,9 @@ public class Player extends Entity implements Constant, ImagePath {
     public void addBombs() {
         bombManager.addBomb();
     }
-    public void increaseBombLength() {
-        bombManager.increaseBombFlames();
+
+    public void increaseSpeed() {
+        this.speed++;
     }
 
 }

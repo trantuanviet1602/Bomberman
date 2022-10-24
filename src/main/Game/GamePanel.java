@@ -5,10 +5,8 @@ import SuperObject.Bomb.BombManager;
 import SuperObject.Enhancement.EnhancementManager;
 import UI.UI;
 import demo.Sound.Sound;
-import demo.entity.Enemy.Balloom.BalloomManager;
 import demo.entity.CollisionCheck;
-import demo.entity.Enemy.Kondoria.KondoriaManager;
-import demo.entity.Enemy.Oneal.Oneal;
+import demo.entity.Enemy.EnemyManager;
 import demo.entity.Player.Player;
 import demo.tile.GameMap;
 import demo.tile.TileManager;
@@ -20,9 +18,9 @@ public class GamePanel extends JPanel implements Runnable, Constant {
     //Screen Settings
 
     Keyboard keyboard = new Keyboard(this);
-    public BombManager bombManager = new BombManager(this);
-    public Player player = new Player(this, keyboard, bombManager);
-    public GameMap gameMap = new GameMap();
+    private BombManager bombManager = new BombManager(this);
+    private Player player = new Player(this, keyboard, bombManager);
+    private GameMap gameMap = new GameMap();
 
     private UI ui = new UI(this);
 
@@ -33,10 +31,9 @@ public class GamePanel extends JPanel implements Runnable, Constant {
     Thread gameThread = new Thread(this);
     public CollisionCheck collisionCheck = new CollisionCheck(this, bombManager, tileManager);
 
-    public BalloomManager balloomManager = new BalloomManager(this, gameMap);
-    public KondoriaManager kondoriaManager = new KondoriaManager(this, gameMap);
+    private final EnemyManager enemyManager = new EnemyManager(this, gameMap);
 
-    public EnhancementManager enhancementManager = new EnhancementManager(this, gameMap);
+    private final EnhancementManager enhancementManager = new EnhancementManager(this, gameMap);
 
 
 
@@ -104,14 +101,18 @@ public class GamePanel extends JPanel implements Runnable, Constant {
 
     public void update() {
         if (gameState == playState) {
-            player.update(bombManager);
+
             enhancementManager.update(player);
             tileManager.update(bombManager);
-            balloomManager.update(player, bombManager);
-            kondoriaManager.update(player, bombManager);
-            bombManager.update();
+            player.update(bombManager, tileManager);
+            bombManager.update(tileManager);
+            enemyManager.update(player, bombManager);
+
         }
         if (gameState == pauseState) {
+
+        }
+        if (gameState == titleState) {
 
         }
     }
@@ -125,8 +126,7 @@ public class GamePanel extends JPanel implements Runnable, Constant {
             this.setBackground(Color.green);
             enhancementManager.draw(graphics2D);
             tileManager.draw(graphics2D);
-            balloomManager.draw(graphics2D);
-            kondoriaManager.draw(graphics2D);
+            enemyManager.draw(graphics2D);
             bombManager.draw(graphics2D);
             player.draw(graphics2D);
         }
@@ -148,5 +148,9 @@ public class GamePanel extends JPanel implements Runnable, Constant {
     public void playSE(String s) {
         sound.setFile(s);
         sound.play();
+    }
+
+    public GameMap getGameMap() {
+        return gameMap;
     }
 }

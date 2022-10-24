@@ -5,6 +5,7 @@ import Game.GamePanel;
 import Implements.ImagePath;
 import demo.entity.Entity;
 import demo.entity.Player.Player;
+import demo.tile.TileManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -31,8 +32,8 @@ public class Explosion extends Entity implements ImagePath, Constant {
 
 
     public void setCoordinates(Bomb bomb, Player player) {
-        this.x = bomb.x;
-        this.y = bomb.y;
+        this.x = bomb.getX();
+        this.y = bomb.getY();
         //TODO: Thực hiện lấy tọa độ của Bomb trên bản đồ, để thực hiện CheckCollision.
         mapX = x / tileSize;
         mapY = y / tileSize;
@@ -61,31 +62,55 @@ public class Explosion extends Entity implements ImagePath, Constant {
 
     public boolean killed(Entity entity) {
         //TODO: Kiểm tra xem Bomb có giết được ai hay không.
-        return entity.x >= this.x - validLeft  * tileSize - 1 && entity.x <= this.x + (validRight + 1) * tileSize - 3
-                && ((entity.y + tileSize / 2)/ tileSize ) * tileSize == this.y
-                || ((entity.x + tileSize / 2)/ tileSize ) * tileSize == this.x
-                && entity.y >= this.y - (validUp) * tileSize - 1 && entity.y <= this.y + (validDown + 1) * tileSize - 3;
+        return entity.getX() >= this.x - validLeft  * tileSize - 1 && entity.getX() <= this.x + (validRight + 1) * tileSize - 3
+                && ((entity.getY() + tileSize / 2)/ tileSize ) * tileSize == this.y
+                || ((entity.getX() + tileSize / 2)/ tileSize ) * tileSize == this.x
+                && entity.getY() >= this.y - (validUp) * tileSize - 1 && entity.getY() <= this.y + (validDown + 1) * tileSize - 3;
     }
 
-    public void checkCollisionExploded() {
+    public void checkCollisionExploded(TileManager tileManager) {
 
         //TODO: CheckCollision cho Bomb để tạo flame.
         System.out.println(this.bombLength);
         for (int i = 1; i <= this.bombLength ; i++) {
-            if (!stopRight && gamePanel.tileManager.gameMap.mapTile[mapY]
+            if (!stopRight && tileManager.gameMap.mapTile[mapY]
                     .charAt(Math.min(mapX + i, maxScreenCol - 1)) != '#') validRight++;
             else stopRight = true;
-            if (!stopLeft && gamePanel.tileManager.gameMap.mapTile[mapY]
+            if (!stopLeft && tileManager.gameMap.mapTile[mapY]
                     .charAt(Math.max(mapX - i, 0)) != '#') validLeft++;
             else stopLeft = true;
-            if (!stopUp && gamePanel.tileManager.gameMap.mapTile[Math.max(mapY - i, 0)]
+            if (!stopUp && tileManager.gameMap.mapTile[Math.max(mapY - i, 0)]
                     .charAt(mapX) != '#') validUp++;
             else stopUp = true;
-            if (!stopDown && gamePanel.tileManager.gameMap.mapTile[Math.min(mapY + i, maxScreenRow - 1)]
+            if (!stopDown && tileManager.gameMap.mapTile[Math.min(mapY + i, maxScreenRow - 1)]
                     .charAt(mapX) != '#') validDown++;
             else stopDown = true;
         }
 
+        for (int i = 1; i <= validUp; i++) {
+            if (tileManager.mapCollision[mapY - i][mapX]) {
+                validUp = i;
+                break;
+            }
+        }
+        for (int i = 1; i <= validDown; i++) {
+            if (tileManager.mapCollision[mapY + i][mapX]) {
+                validDown = i;
+                break;
+            }
+        }
+        for (int i = 1; i <= validLeft; i++) {
+            if (tileManager.mapCollision[mapY][mapX - i]) {
+                validLeft = i;
+                break;
+            }
+        }
+        for (int i = 1; i <= validRight; i++) {
+            if (tileManager.mapCollision[mapY][mapX + i]) {
+                validRight = i;
+                break;
+            }
+        }
     }
 
     public boolean isExploding() {

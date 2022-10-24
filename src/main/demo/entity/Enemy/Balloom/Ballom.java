@@ -9,9 +9,9 @@ import demo.entity.Player.Player;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Balloom extends Enemy {
-    BalloomImage balloomImage = new BalloomImage();
-    public Balloom(int x, int y, GamePanel gamePanel) {
+public class Ballom extends Enemy {
+    BallomImage ballomImage = new BallomImage();
+    public Ballom(int x, int y, GamePanel gamePanel) {
         this.x = x;
         this.y = y;
         solidArea = new Rectangle(32 , 32  , Constant.tileSize - 2, Constant.tileSize - 2);
@@ -116,16 +116,16 @@ public class Balloom extends Enemy {
             switch (direction) {
 
                 case "left" -> {
-                    bufferedImage = balloomImage.left[spriteNum];
+                    bufferedImage = ballomImage.left[spriteNum];
                 }
 
                 case "right" -> {
-                    bufferedImage = balloomImage.right[spriteNum];
+                    bufferedImage = ballomImage.right[spriteNum];
                 }
-                default -> bufferedImage = balloomImage.left[0];
+                default -> bufferedImage = ballomImage.left[0];
             }
         } else {
-            bufferedImage = balloomImage.death;
+            bufferedImage = ballomImage.death;
         }
         graphics2D.drawImage(bufferedImage, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
     }
