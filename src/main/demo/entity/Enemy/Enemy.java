@@ -14,8 +14,8 @@ public abstract class Enemy extends Entity {
     public void draw(Graphics2D graphics2D) {};
 
     public void killPlayer(Player player) {
-        if ((player.getX() / Constant.tileSize == this.x / Constant.tileSize
-                && player.getY() / Constant.tileSize == this.y / Constant.tileSize) && ! this.death) {
+        if ((player.getX() + Constant.tileSize / 2) / Constant.tileSize == (this.x + Constant.tileSize / 2) / Constant.tileSize
+                && (player.getY() + Constant.tileSize / 2) / Constant.tileSize == (this.y + Constant.tileSize / 2) / Constant.tileSize && ! this.death) {
             player.setDeath(true);
         }
     }

@@ -5,10 +5,12 @@ import SuperObject.Bomb.BombManager;
 import SuperObject.Enhancement.EnhancementManager;
 import UI.UI;
 import demo.Sound.Sound;
-import demo.entity.CollisionCheck;
+import demo.Sound.SoundPath;
+import demo.tile.CollisionCheck;
 import demo.entity.Enemy.EnemyManager;
 import demo.entity.Player.Player;
 import demo.tile.GameMap;
+import demo.tile.Grass;
 import demo.tile.TileManager;
 
 import javax.swing.*;
@@ -20,7 +22,8 @@ public class GamePanel extends JPanel implements Runnable, Constant {
     Keyboard keyboard = new Keyboard(this);
     private BombManager bombManager = new BombManager(this);
     private Player player = new Player(this, keyboard, bombManager);
-    private GameMap gameMap = new GameMap();
+    private int currentLevel = 1;
+    private GameMap gameMap = new GameMap(currentLevel);
 
     private UI ui = new UI(this);
 
@@ -28,17 +31,29 @@ public class GamePanel extends JPanel implements Runnable, Constant {
     public TileManager tileManager = new TileManager(this, gameMap);
 
     //Game clock.
-    Thread gameThread = new Thread(this);
+    private Thread gameThread = new Thread(this);
     public CollisionCheck collisionCheck = new CollisionCheck(this, bombManager, tileManager);
 
-    private final EnemyManager enemyManager = new EnemyManager(this, gameMap);
+    private EnemyManager enemyManager = new EnemyManager(this, gameMap);
 
-    private final EnhancementManager enhancementManager = new EnhancementManager(this, gameMap);
+    private EnhancementManager enhancementManager = new EnhancementManager(this, gameMap);
 
+    private boolean nextLevel = false;
 
+    private Grass grass = new Grass(this);
 
-    public int gameState;
+    public boolean isNextLevel() {
+        return nextLevel;
+    }
+
+    public void setNextLevel(boolean nextLevel) {
+        this.nextLevel = nextLevel;
+    }
+
+    public int gameState, lastState = -1;
+
     Sound sound = new Sound();
+
 
 
 
@@ -48,14 +63,29 @@ public class GamePanel extends JPanel implements Runnable, Constant {
 
     int FPS = 60;
 
+    public void setupGame() {
+        this.removeAll();
+        bombManager.reset();
+        player = new Player(this, keyboard, bombManager);
+        sound = new Sound();
+        gameMap = new GameMap(currentLevel);
+        ui = new UI(this);
+        tileManager = new TileManager(this, gameMap);
+
+        collisionCheck = new CollisionCheck(this, bombManager, tileManager);
+        enemyManager = new EnemyManager(this, gameMap);
+        enhancementManager = new EnhancementManager(this, gameMap);
+
+    }
 
     public GamePanel() {
+        setupGame();
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // Đặt kích cỡ của class JPanel.
-        this.setBackground(Color.green);
+        this.setBackground(Color.black);
         this.setDoubleBuffered(true); //Tất cả các bản vẽ từ thành phần này sẽ được thực hiện trong một bộ đệm vẽ ngoài màn hình
         this.addKeyListener(keyboard);
         this.setFocusable(true);
-        gameState = playState;
+        gameState = titleState;
 
     }
 
@@ -97,9 +127,23 @@ public class GamePanel extends JPanel implements Runnable, Constant {
                 timer = 0;
             }
         }
+
+    }
+
+    public void updateSound() {
+        if (gameState != lastState ) {
+             if (gameState == titleState) {
+                playMusic(SoundPath.TITLE);
+             } else if (gameState == levelState && lastState != playState) {
+                 stopMusic();
+                 playMusic(SoundPath.STAGE);
+             }
+            lastState = gameState;
+        }
     }
 
     public void update() {
+        updateSound();
         if (gameState == playState) {
 
             enhancementManager.update(player);
@@ -109,11 +153,8 @@ public class GamePanel extends JPanel implements Runnable, Constant {
             enemyManager.update(player, bombManager);
 
         }
-        if (gameState == pauseState) {
-
-        }
-        if (gameState == titleState) {
-
+        if (player.isDeath() && player.getDeathSpriteNum() >= 3) {
+            gameState = gameOverState;
         }
     }
 
@@ -123,11 +164,11 @@ public class GamePanel extends JPanel implements Runnable, Constant {
 
         ui.draw(graphics2D);
         if(this.gameState == playState) {
-            this.setBackground(Color.green);
+            grass.draw(graphics2D);
             enhancementManager.draw(graphics2D);
+            bombManager.draw(graphics2D);
             tileManager.draw(graphics2D);
             enemyManager.draw(graphics2D);
-            bombManager.draw(graphics2D);
             player.draw(graphics2D);
         }
 
@@ -152,5 +193,35 @@ public class GamePanel extends JPanel implements Runnable, Constant {
 
     public GameMap getGameMap() {
         return gameMap;
+    }
+
+    public void nextLevel() {
+        if (nextLevel) {
+            currentLevel ++;
+
+            nextLevel = false;
+            setupGame();
+        }
+
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public EnemyManager getEnemyManager() {
+        return enemyManager;
+    }
+
+    public UI getUi() {
+        return ui;
+    }
+
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void setCurrentLevel(int currentLevel) {
+        this.currentLevel = currentLevel;
     }
 }

@@ -28,7 +28,7 @@ public class Player extends Entity implements Constant, ImagePath {
         setDefaultValues();
 
         //TODO: Tạo vùng collision cho nhân vật.
-        solidArea = new Rectangle(this.x, this.y, tileSize - 10, tileSize - 3 );
+        solidArea = new Rectangle(this.x, this.y + 4, tileSize - 10, tileSize - 5 );
     }
 
     public void setDefaultValues() {

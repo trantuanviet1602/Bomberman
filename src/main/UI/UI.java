@@ -3,6 +3,7 @@ package UI;
 import Game.GamePanel;
 import Implements.Constant;
 import Implements.ImagePath;
+import demo.Sound.SoundPath;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,10 +12,9 @@ import java.io.File;
 
 public class UI {
     GamePanel gamePanel;
-    Font arial_40, arial_80B;
-    public boolean messageOn = false;
+    private int choiceCounter = 0;
     Graphics2D graphics2D;
-    int messageCounter = 0;
+    private int counter = 0;
 
     BufferedImage bufferedImage;
 
@@ -36,16 +36,57 @@ public class UI {
         if (gamePanel.gameState == Constant.titleState) {
             this.drawTitleScreen();
         }
+        if (gamePanel.gameState == Constant.levelState){
+            this.drawLevelScreen();
+        }
+        if (gamePanel.gameState == Constant.gameOverState) {
+            this.drawGameOver();
+        }
     }
 
     public void drawTitleScreen() {
         this.gamePanel.setBackground(Color.black);
-        graphics2D.drawImage(bufferedImage, 0, 0,
-                Constant.maxScreenCol * Constant.tileSize, Constant.maxScreenRow * Constant.tileSize, null);
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 96F));
+        String text = "BOMBERMAN";
+        int x = getXforCenteredText(text);
+        int y = Constant.tileSize * 3;
+        graphics2D.setColor(Color.gray);
+        graphics2D.drawString(text, x, y);
+
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 36F));
+        text = "NEW GAME";
+        x = getXforCenteredText(text);
+        y = Constant.tileSize * 8;
+        graphics2D.drawString(text, x, y);
+        if (choiceCounter == 0) {
+            graphics2D.drawString(">", x - 2 * Constant.tileSize, y);
+        }
+
+        text = "QUIT";
+        x = getXforCenteredText(text);
+        y = Constant.tileSize * 10;
+        graphics2D.drawString(text, x, y);
+        if (choiceCounter == 1) {
+            graphics2D.drawString(">", x - 2 * Constant.tileSize, y);
+        }
+
+    }
+
+    public void drawLevelScreen() {
+        counter++;
+
+        String text = "Level " + gamePanel.getCurrentLevel();
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 96F));
+        graphics2D.setColor(Color.gray);
+        int x = getXforCenteredText(text);
+        int y = Constant.screenHeight / 2;
+        graphics2D.drawString(text, x, y);
+        if (counter > 100) {
+            gamePanel.gameState = GamePanel.playState;
+        }
     }
 
     public void drawPauseScreen() {
-        this.gamePanel.setBackground(Color.black);
         graphics2D.setColor(Color.white);
         this.graphics2D.setFont(gamePanel.getFont().deriveFont(Font.PLAIN, 80F));
         String text = "Paused";
@@ -61,7 +102,24 @@ public class UI {
 
     public int getXforCenteredText(String text) {
         int length = (int) graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
-        int x = Constant.screenWidth / 2 - length / 2;
-        return x;
+        return Constant.screenWidth / 2 - length / 2;
     }
+
+    public void drawGameOver() {
+        graphics2D.setColor(Color.white);
+        this.graphics2D.setFont(gamePanel.getFont().deriveFont(Font.PLAIN, 80F));
+        String text = "Game Over";
+        int x = getXforCenteredText(text);
+        int y = Constant.screenHeight / 2;
+        graphics2D.drawString(text, x, y);
+    }
+
+    public void changeChoiceCounter(int i) {
+        choiceCounter = (choiceCounter + i) % 2;
+    }
+
+    public int getChoiceCounter() {
+        return choiceCounter;
+    }
+
 }

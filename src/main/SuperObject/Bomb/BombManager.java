@@ -2,10 +2,9 @@ package SuperObject.Bomb;
 
 import Game.GamePanel;
 import demo.entity.Entity;
-import demo.entity.Player.EntityManagement;
+import demo.entity.EntityManagement;
 import demo.entity.Player.Player;
 import demo.tile.TileManager;
-import javafx.util.Pair;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class BombManager extends EntityManagement {
     public BombManager(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
-        bombs.add(new Bomb(this.gamePanel));;
+        bombs.add(new Bomb(this.gamePanel));
     }
 
     @Override
@@ -25,6 +24,11 @@ public class BombManager extends EntityManagement {
 
     @Override
     public void update(Player player, BombManager bombManager) {}
+
+    public void reset() {
+        bombs = new ArrayList<>();
+        bombs.add(new Bomb(gamePanel));
+    }
 
     @Override
     public void update(BombManager bombManager) {}
@@ -44,6 +48,9 @@ public class BombManager extends EntityManagement {
         }
     }
 
+    /**
+     * TODO: Kiểm tra xem Entity có bị tiêu diệt hay không, nếu như Bomb đang nổ và Entity đang ở gần.
+     */
     public void killEntity(Entity entity) {
         for (Bomb bomb: bombs) {
             if (bomb.explosion.isExploding() && bomb.explosion.killed(entity)) {
@@ -59,14 +66,10 @@ public class BombManager extends EntityManagement {
         }
     }
 
-    public void increaseBombFlames() {
-        for (int i = 0; i < bombs.size(); i++) {
-            bombs.get(i).explosion.increaseBombLength();
-            System.out.println(bombs.get(i).explosion.bombLength);
-        }
-    }
 
     public void addBomb() {
+
         bombs.add(new Bomb(gamePanel));
+        System.out.println(bombs.size());
     }
 }

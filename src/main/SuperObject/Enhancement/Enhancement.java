@@ -8,9 +8,12 @@ import demo.entity.Player.Player;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Enhancement extends Entity implements Constant {
+public abstract class Enhancement extends Entity implements Constant {
+
+    //TODO: Class đóng vai trò thể hiện các Item nâng cấp trong game.
     public void update(Player player) {
-        if (checkCollision((player.getX() + tileSize / 2) / tileSize + 1, (player.getY() + tileSize / 2) / tileSize + 1)) {
+        if (checkCollision((player.getX() + tileSize / 2) / tileSize + 1,
+                (player.getY() + tileSize / 2) / tileSize + 1)) {
             this.death = true;
         }
         if (this.isDeath()) {

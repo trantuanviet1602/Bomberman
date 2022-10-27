@@ -19,15 +19,15 @@ public class GameMap implements Constant {
         return rows;
     }
 
-    public GameMap() {
+    public GameMap(int level) {
         try {
-            loadMap();
+            loadMap(level);
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }
-    public void loadMap() throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("src/res/text/Level1.txt"));
+    public void loadMap(int level) throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File("src/res/text/Level" + level + ".txt"));
         scanner.nextInt();
         rows = scanner.nextInt();
         cols = scanner.nextInt();
@@ -39,13 +39,4 @@ public class GameMap implements Constant {
         }
     }
 
-    public static void main(String[] args) {
-        GameMap gameMap = new GameMap();
-        try {
-            gameMap.loadMap();
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
 }

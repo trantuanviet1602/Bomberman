@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 
 public class Oneal extends Enemy {
-    OnealImage onealImage = new OnealImage();
+    private final OnealImage onealImage = new OnealImage();
     private final double[][] lengthToCoordinate;
     private int rowPlayer, colPlayer;
     private int colX, rowY;
@@ -36,32 +36,25 @@ public class Oneal extends Enemy {
      * TODO: di chuyển Oneal đến vị trí chỉ định khi thực hiện truy đuổi.
      */
     public void moveTo(int x, int y) {
-        if (this.x != x && this.y != y) {
-            this.x = x;
-            this.y = y;
-        } else if (this.x != x) {
-                if (this.x > x) {
-                    this.x -= speed;
-                    direction = "left";
-                }
-                if(this.x < x) {
-                    this.x += speed;
-                    direction = "right";
-                }
-                moveCounter = 0;
+        if (this.x != x) {
+            if (this.x > x) {
+                this.x -= speed;
+                direction = "left";
             }
-
-        else if (this.y != y) {
-            moveCounter++;
-                if (this.y > y) {
-                    this.y -= speed;
-                    direction = "up";
-                }
-                if (this.y < y) {
-                    this.y += speed;
-                    direction = "down";
-                }
+            if(this.x < x) {
+                this.x += speed;
+                direction = "right";
             }
+        } else if (this.y != y) {
+            if (this.y > y) {
+                this.y -= speed;
+                direction = "up";
+            }
+            if (this.y < y) {
+                this.y += speed;
+                direction = "down";
+            }
+        }
 
     }
 
@@ -74,7 +67,6 @@ public class Oneal extends Enemy {
      * TODO: Set các giá trị để thực hiện thuật toán A*.
      */
     public void setupCoordinate(Player player) {
-       // long s = System.nanoTime();
         colPlayer = (player.getX() + Constant.tileSize / 2) / Constant.tileSize;
         rowPlayer = (player.getY() + Constant.tileSize / 2) / Constant.tileSize;
         colX = (this.x + Constant.tileSize / 2) / Constant.tileSize;
@@ -153,7 +145,7 @@ public class Oneal extends Enemy {
         //TODO: Tìm ra đường đi ngắn nhất từ danh sách Closed bằng cách lấy phần tử gần nhất thỏa mãn kế bên điểm cuối.
 
         int index = closed.size() - 1;
-        if(closed.contains(new Pair<>(rowPlayer, colPlayer))) {
+        if (closed.contains(new Pair<>(rowPlayer, colPlayer))) {
             finalPath.add(new Pair<>(rowPlayer, colPlayer));
             while (finalPath.get(finalPath.size() - 1) != closed.get(0)) {
                 for (int i = 0; i <= index; i++) {
@@ -291,13 +283,15 @@ public class Oneal extends Enemy {
             if (chasePath == null || distance(colPlayer, rowPlayer) >= 15) {
                 moveRandom();
             } else {
-                if (!isPosition(chasePath.get(currentPosition)) && currentPosition != 0) {
+                if (distance((player.getX() + Constant.tileSize / 2) / Constant.tileSize,
+                        (player.getY() + Constant.tileSize / 2) / Constant.tileSize) <= 1) {
+                    moveTo((player.getX() + Constant.tileSize / 2) / Constant.tileSize * Constant.tileSize,
+                            (player.getY() + Constant.tileSize / 2) / Constant.tileSize * Constant.tileSize);
+
+                } else if (!isPosition(chasePath.get(currentPosition)) && currentPosition >= 0) {
                     moveTo(chasePath.get(currentPosition).getValue() * Constant.tileSize,
                             chasePath.get(currentPosition).getKey() * Constant.tileSize);
-                    System.out.println(chasePath.get(currentPosition));
-                    System.out.println(rowY + " " + colX);
-                    System.out.println(this.y + " " + this.x);
-                } else if (currentPosition != 0) {
+                } else if (currentPosition >= 0) {
                     delayCounter += 15;
                     currentPosition --;
                     if (chasePath.size() - currentPosition == 3) {

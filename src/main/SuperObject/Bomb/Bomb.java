@@ -72,6 +72,7 @@ public class Bomb extends Entity implements ImagePath, Constant {
             explosion = new Explosion(gamePanel);
             explosion.setCoordinates(this, player);
             explosion.checkCollisionExploded(tileManager);
+            tileManager.mapCollision[this.y/tileSize][this.x/tileSize] = true;
         }
     }
 
@@ -84,8 +85,8 @@ public class Bomb extends Entity implements ImagePath, Constant {
                 spriteNum = (spriteNum + 1) % 3;
                 spriteCounter = 0;
             }
-            if (collisionTime >= 40) collision = true;
-            tileManager.mapCollision[this.y/tileSize][this.x/tileSize] = true;
+            if (collisionTime >= 30) collision = true;
+
             bombManager.killEntity(this);
         } else {
             spriteNum = -1;
@@ -114,7 +115,7 @@ public class Bomb extends Entity implements ImagePath, Constant {
     public void draw(Graphics2D graphics2D) {
         if (exploded) {
             explosion.draw(graphics2D);
-            exploded = false;
+            if(!explosion.isExploding()) exploded = false;
         } else {
             if (spriteNum == 0) {
                 graphics2D.drawImage(bufferedImage, this.x, this.y, tileSize, tileSize , null);

@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Explosion extends Entity implements ImagePath, Constant {
-    public int bombLength;
+    private int bombLength;
 
     private int mapX, mapY;
 
@@ -71,10 +71,9 @@ public class Explosion extends Entity implements ImagePath, Constant {
     public void checkCollisionExploded(TileManager tileManager) {
 
         //TODO: CheckCollision cho Bomb để tạo flame.
-        System.out.println(this.bombLength);
         for (int i = 1; i <= this.bombLength ; i++) {
             if (!stopRight && tileManager.gameMap.mapTile[mapY]
-                    .charAt(Math.min(mapX + i, maxScreenCol - 1)) != '#') validRight++;
+                    .charAt(Math.min(mapX + i, tileManager.gameMap.getCols() - 1)) != '#') validRight++;
             else stopRight = true;
             if (!stopLeft && tileManager.gameMap.mapTile[mapY]
                     .charAt(Math.max(mapX - i, 0)) != '#') validLeft++;
@@ -82,11 +81,12 @@ public class Explosion extends Entity implements ImagePath, Constant {
             if (!stopUp && tileManager.gameMap.mapTile[Math.max(mapY - i, 0)]
                     .charAt(mapX) != '#') validUp++;
             else stopUp = true;
-            if (!stopDown && tileManager.gameMap.mapTile[Math.min(mapY + i, maxScreenRow - 1)]
+            if (!stopDown && tileManager.gameMap.mapTile[Math.min(mapY + i, tileManager.gameMap.getRows() - 1)]
                     .charAt(mapX) != '#') validDown++;
             else stopDown = true;
         }
 
+        //TODO: Check Collision trên Brick.
         for (int i = 1; i <= validUp; i++) {
             if (tileManager.mapCollision[mapY - i][mapX]) {
                 validUp = i;
@@ -130,6 +130,7 @@ public class Explosion extends Entity implements ImagePath, Constant {
             downLast = explosionImage.explosionVerticalDownLast[spriteNum];
         }
 
+        //TODO: Vẽ ra các hình ảnh Bomb nổ sao cho có sự khác biệt ở giữa, ở rìa ngoài và ở bên trong.
         for (int i = - validRight + 1 ; i <= validLeft - 1; i++) {
             graphics2D.drawImage(explodeHorizontal, this.x - i * tileSize , this.y , tileSize, tileSize, null);
         }
@@ -143,8 +144,4 @@ public class Explosion extends Entity implements ImagePath, Constant {
         if (validDown > 0) graphics2D.drawImage(downLast, this.x, this.y + validDown * tileSize, tileSize, tileSize, null);
     }
 
-    public void increaseBombLength() {
-        this.bombLength = this.bombLength + 1;
-        //System.out.println(bombLength);
-    }
 }

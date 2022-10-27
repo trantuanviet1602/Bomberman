@@ -20,6 +20,10 @@ public class Ballom extends Enemy {
         this.speed = 1;
     }
 
+
+    /**
+     * TODO: Update trạng thái cho Ballom. Di chuyển ngẫu nhiên và thay đổi hướng đi khi chạm phải Collision.
+     */
     @Override
     public void update(Player player, BombManager bombManager) {
         if (!death) {
@@ -92,6 +96,8 @@ public class Ballom extends Enemy {
             }
             killPlayer(player);
             bombManager.killEntity(this);
+
+            //TODO: Thay đổi Counter để render ra màn hình.
             spriteCounter++;
             if (spriteCounter > 10) {
                 spriteNum = (spriteNum + 1) % 3;

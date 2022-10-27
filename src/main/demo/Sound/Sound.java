@@ -24,7 +24,7 @@ public class Sound implements SoundPath{
 
             clip.open(audioInputStream);
         } catch (Exception e) {
-            System.out.println("Cannot set File from Sound");
+            System.out.println("Cannot set File " + s + " from Sound");
         }
     }
 
@@ -38,5 +38,7 @@ public class Sound implements SoundPath{
 
     public void stop() {
         clip.stop();
+        clip.close();
+        clip.drain();
     }
 }

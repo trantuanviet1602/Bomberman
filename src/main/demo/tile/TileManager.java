@@ -9,8 +9,10 @@ import demo.tile.brick.BrickManager;
 import demo.tile.wall.Wall;
 import demo.tile.wall.WallManager;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
-import java.util.HashMap;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 
 public class TileManager implements ImagePath, Constant {
@@ -20,8 +22,6 @@ public class TileManager implements ImagePath, Constant {
     public GameMap gameMap;
 
     public boolean[][] mapCollision;
-    public HashMap<Integer, Integer> tileHash = new HashMap<>();
-
 
 
 
@@ -47,6 +47,7 @@ public class TileManager implements ImagePath, Constant {
 
 
     public void draw(Graphics2D graphics2D) {
+
         brickManager.draw(graphics2D);
         wallManager.draw(graphics2D);
     }

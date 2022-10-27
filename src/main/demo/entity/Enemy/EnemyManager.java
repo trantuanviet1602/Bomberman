@@ -6,7 +6,7 @@ import SuperObject.Bomb.BombManager;
 import demo.entity.Enemy.Balloom.Ballom;
 import demo.entity.Enemy.Kondoria.Kondoria;
 import demo.entity.Enemy.Oneal.Oneal;
-import demo.entity.Player.EntityManagement;
+import demo.entity.EntityManagement;
 import demo.entity.Player.Player;
 import demo.tile.GameMap;
 

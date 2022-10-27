@@ -1,5 +1,4 @@
 package Game;
-import Game.GamePanel;
 
 import javax.swing.*;
 

@@ -3,7 +3,7 @@ package SuperObject.Enhancement;
 import Game.GamePanel;
 import Implements.Constant;
 import SuperObject.Bomb.BombManager;
-import demo.entity.Player.EntityManagement;
+import demo.entity.EntityManagement;
 import demo.entity.Player.Player;
 import demo.tile.GameMap;
 

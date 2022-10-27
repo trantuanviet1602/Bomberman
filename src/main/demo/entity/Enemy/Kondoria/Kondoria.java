@@ -31,6 +31,9 @@ public class Kondoria extends Enemy {
 
     @Override
     public void update(Player player, BombManager bombManager) {
+        /*TODO: Thực hiện update các trạng thái cho Kondoria. Kondoria có thể di chuyển xuyên qua các vật thể, ngoại trừ Wall.
+        TODO: Di chuyển Kondoria ngẫu nhiên sao cho chúng có thể thay đổi hướng đi khi đi được một số bước.
+        * */
         if (!death) {
             upCollision = false;
             downCollision = false;
@@ -45,8 +48,8 @@ public class Kondoria extends Enemy {
             }
             if (direction.equals("up")) {
                 gamePanel.collisionCheck.CheckTile(this);
-                if(!upCollision) this.y = Math.max(this.y - speed, Constant.tileSize);
-                if (upCollision||isPosition(currentX, Math.max(currentY - randomLength * Constant.tileSize, Constant.tileSize))) {
+                if (!upCollision) this.y = Math.max(this.y - speed, Constant.tileSize);
+                if (upCollision || isPosition(currentX, Math.max(currentY - randomLength * Constant.tileSize, Constant.tileSize))) {
                     int newDirection = (int) (Math.random() * 100) % 3;
                     if (newDirection == 0) {
                         direction = "down";
@@ -62,8 +65,8 @@ public class Kondoria extends Enemy {
 
             if (direction.equals("down")) {
                 gamePanel.collisionCheck.CheckTile(this);
-                if(!downCollision) this.y = Math.min(this.y + speed, (Constant.maxScreenRow - 2) * Constant.tileSize);
-                if (downCollision||isPosition(currentX, Math.min(currentY + randomLength * Constant.tileSize,
+                if (!downCollision) this.y = Math.min(this.y + speed, (Constant.maxScreenRow - 2) * Constant.tileSize);
+                if (downCollision || isPosition(currentX, Math.min(currentY + randomLength * Constant.tileSize,
                         (Constant.maxScreenRow - 2) * Constant.tileSize))) {
                     int newDirection = (int) (Math.random() * 100) % 3;
                     if (newDirection == 0) {
@@ -80,8 +83,8 @@ public class Kondoria extends Enemy {
 
             if (direction.equals("left")) {
                 gamePanel.collisionCheck.CheckTile(this);
-                if(!leftCollision) this.x = Math.max(Constant.tileSize, this.x - speed);
-                if (leftCollision||isPosition(Math.max(currentX - randomLength * Constant.tileSize, Constant.tileSize), currentY)) {
+                if (!leftCollision) this.x = Math.max(Constant.tileSize, this.x - speed);
+                if (leftCollision || isPosition(Math.max(currentX - randomLength * Constant.tileSize, Constant.tileSize), currentY)) {
                     int newDirection = (int) (Math.random() * 100) % 3;
                     if (newDirection == 0) {
                         direction = "down";
@@ -97,8 +100,8 @@ public class Kondoria extends Enemy {
 
             if (direction.equals("right")) {
                 gamePanel.collisionCheck.CheckTile(this);
-                if(!rightCollision) this.x = Math.min(this.x + speed, (Constant.maxScreenCol - 2) * Constant.tileSize);
-                if (rightCollision||isPosition(Math.min(currentX + randomLength * Constant.tileSize,
+                if (!rightCollision) this.x = Math.min(this.x + speed, (Constant.maxScreenCol - 2) * Constant.tileSize);
+                if (rightCollision || isPosition(Math.min(currentX + randomLength * Constant.tileSize,
                         (Constant.maxScreenCol - 2) * Constant.tileSize), currentY)) {
                     int newDirection = (int) (Math.random() * 100) % 3;
                     if (newDirection == 0) {
@@ -137,9 +140,8 @@ public class Kondoria extends Enemy {
             //TODO: Thay đổi BufferedImage dựa trên hướng đi của nhân vật và tạo animation.
             switch (direction) {
 
-                case "left" -> bufferedImage = kondoriaImage.left[spriteNum];
-                case "right" -> bufferedImage = kondoriaImage.right[spriteNum];
-                default -> bufferedImage = kondoriaImage.left[0];
+                case "right", "down" -> bufferedImage = kondoriaImage.right[spriteNum];
+                default -> bufferedImage = kondoriaImage.left[spriteNum];
             }
         } else {
             bufferedImage = kondoriaImage.death;

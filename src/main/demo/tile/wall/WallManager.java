@@ -4,15 +4,12 @@ import Game.GamePanel;
 import Implements.Constant;
 
 import java.awt.*;
-import java.net.Inet4Address;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import SuperObject.Bomb.BombManager;
-import demo.entity.Player.EntityManagement;
+import demo.entity.EntityManagement;
 import demo.entity.Player.Player;
 import demo.tile.GameMap;
-import javafx.util.Pair;
 
 public class WallManager extends EntityManagement {
     public ArrayList<Wall> walls = new ArrayList<>();

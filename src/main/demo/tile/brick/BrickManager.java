@@ -3,9 +3,9 @@ package demo.tile.brick;
 import Implements.Constant;
 import SuperObject.Bomb.BombManager;
 import Game.GamePanel;
-import demo.entity.Player.EntityManagement;
+import demo.entity.EntityManagement;
 import demo.entity.Player.Player;
-import demo.entity.Portal;
+import demo.tile.Portal;
 import demo.tile.GameMap;
 
 import java.awt.*;
@@ -16,6 +16,9 @@ public class BrickManager extends EntityManagement {
     private Portal portal;
 
 
+    /**
+     * Constructor.
+     */
     public BrickManager(GamePanel gamePanel, GameMap gameMap) {
         super(gamePanel, gameMap);
         portal = new Portal(-16, -16, gamePanel);
@@ -42,6 +45,9 @@ public class BrickManager extends EntityManagement {
     @Override
     public void update(BombManager bombManager) {}
 
+    /**
+     * TODO: update từng Brick và Portal.
+     */
     public void update(BombManager bombManager, boolean[][] mapCollision) {
         for (Brick value : bricks) {
             value.update(bombManager);
@@ -50,15 +56,19 @@ public class BrickManager extends EntityManagement {
 
             }
         }
+        portal.update(gamePanel.getPlayer(), gamePanel.getEnemyManager());
         bricks.removeIf(brick -> brick.isDeath() && brick.getDeathSpriteNum() == 3);
     }
 
 
+    /**
+     * TODO: Vẽ các Bricks và Portal.
+     */
     @Override
     public void draw(Graphics2D graphics2D) {
         portal.draw(graphics2D);
-        for (Brick brick: bricks) {
-            brick.draw(graphics2D);
+        for (int i = 0; i < bricks.size(); i++) {
+            bricks.get(i).draw(graphics2D);
         }
     }
 
