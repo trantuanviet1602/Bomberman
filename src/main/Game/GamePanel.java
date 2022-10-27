@@ -161,8 +161,6 @@ public class GamePanel extends JPanel implements Runnable, Constant {
     public void paintComponent(Graphics graphics) {
         super.paintComponent (graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
-
-        ui.draw(graphics2D);
         if(this.gameState == playState) {
             grass.draw(graphics2D);
             enhancementManager.draw(graphics2D);
@@ -171,6 +169,8 @@ public class GamePanel extends JPanel implements Runnable, Constant {
             enemyManager.draw(graphics2D);
             player.draw(graphics2D);
         }
+        else ui.draw(graphics2D);
+
 
        graphics2D.dispose(); //Giảm bộ nhớ.
 

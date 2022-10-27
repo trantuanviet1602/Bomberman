@@ -16,12 +16,13 @@ public class UI {
     Graphics2D graphics2D;
     private int counter = 0;
 
-    BufferedImage bufferedImage;
+    BufferedImage bomberImage, onealImage;
 
     public UI(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         try {
-            bufferedImage = ImageIO.read(new File(ImagePath.TITLE_PATH));
+            bomberImage = ImageIO.read(new File(ImagePath.RIGHT_PATH));
+            onealImage = ImageIO.read(new File(ImagePath.ONEAL_LEFT[0]));
         } catch (Exception e) {
             System.out.println("Cannot load file from UI");
         }
@@ -52,6 +53,9 @@ public class UI {
         int y = Constant.tileSize * 3;
         graphics2D.setColor(Color.gray);
         graphics2D.drawString(text, x, y);
+
+        graphics2D.drawImage(bomberImage, 100, 100, Constant.tileSize * 3, Constant.tileSize * 3, null);
+        graphics2D.drawImage(onealImage, Constant.screenWidth - 200, 100, Constant.tileSize * 3, Constant.tileSize * 3, null);
 
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 36F));
         text = "NEW GAME";
